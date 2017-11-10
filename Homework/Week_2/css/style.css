@@ -1,0 +1,23 @@
+/* knmidata.html format CSS file */
+body {
+	font-family: Comfortaa; 
+}
+
+#rawdata {
+	width: 800px;
+	height: 100px;
+	padding: 50px 1px 1px 1px;
+	text-align: left;
+}
+
+#myCanvas {
+	border: solid 1px;
+	width: 800px;
+	height: 500px;
+}
+
+#datatitle {
+	font-size: 15pt;
+	padding: 1px 50px 1px 1px;
+}
+
