@@ -1,0 +1,32 @@
+body {
+	font-family: 'Comfortaa', cursive; 
+	background-color: #005e49;
+}
+
+svg {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+} 
+
+h1 {
+	text-align:center;
+	font-size: 20px;
+	color: #fff;
+}
+
+.barcolor {
+	fill: #630429;
+	-webkit-transition: 0.1s;
+}
+
+.barcolor:hover {
+	fill: #00ffc7;
+}
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: #00ffc7;
+	shape-rendering: crispEdges;
+}
