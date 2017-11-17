@@ -1,6 +1,13 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
 body {
 	font-family: 'Comfortaa', cursive; 
 	background-color: #005e49;
+	margin: 0;
 }
 
 svg {
@@ -11,10 +18,37 @@ svg {
 
 h1 {
 	text-align:center;
-	font-size: 20px;
+	font-size: 100%;
 	color: #fff;
+	padding: 1% 0;
+	font-weight: 400;
 }
 
+h2 {
+	font-size: 80%;
+	line-height: 150%;
+	text-align:center;
+	padding: 1% 0;
+	color: #fff;
+	font-weight: 200;
+}
+
+.container {
+	max-width: 1100px;
+	margin: 0 auto;
+	background-color: #005e49;
+}
+
+.banner {
+	max-width: 1100px;
+	margin: 0 auto;
+	background-color: #005e49;
+}
+
+.banner h1 {
+	padding: 5% 0 3% 0;
+	font-size: 150%;
+}
 .barcolor {
 	fill: #630429;
 	-webkit-transition: 0.1s;
@@ -29,4 +63,8 @@ h1 {
 	fill: none;
 	stroke: #00ffc7;
 	shape-rendering: crispEdges;
+}
+
+.tempcolor {
+	fill: #630429
 }

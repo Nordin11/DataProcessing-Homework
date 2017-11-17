@@ -1,3 +1,6 @@
+/*******************************/
+/* Nordin Bouchrit 11050608 ***/
+/*****************************/
 function load() {
 
 	// define margins 
@@ -53,7 +56,7 @@ function load() {
 		});
 
 		// the data loaded one empty "NaN" value at the end of my array
-		// I couldn't find the reason why this happened so I just popped it
+		// I couldn't find the reason why this happened so I popped it
 		data.pop();		
 
 		// specify the domains of xscale yscale
@@ -81,7 +84,7 @@ function load() {
 			.text(function (d) { return d.temp; })
 			.attr("x", function(d) { return xScale(d.month) + xScale.rangeBand() / 2; })
 			.attr("y", function(d) { return yScale (d.temp) + 20; })
-			.style("fill", "#005e49")
+			.attr("class", "tempcolor")
 			.style("text-anchor", "middle");
 
 		// draw xAxis
@@ -110,3 +113,23 @@ function load() {
 
 	});
 }
+
+
+/* Used sources: 
+
+https://stackoverflow.com/questions/10893004/d3-transform-scale-and-translate
+https://github.com/d3/d3-3.x-api-reference/blob/master/API-Reference.md
+https://www.w3schools.com/jsref/jsref_pop.asp
+https://bost.ocks.org/mike/bar/
+https://bost.ocks.org/mike/bar/2/
+https://bost.ocks.org/mike/bar/3/
+
+*/ 
+
+
+
+
+
+
+
+
