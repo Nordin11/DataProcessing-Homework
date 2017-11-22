@@ -5,7 +5,7 @@ function load() {
 
 	// define margins 
 	var margin = { top: 20, right: 20, bottom: 30, left: 40 },
-                  width  = 960 - margin.left - margin.right,
+                  width  = 800 - margin.left - margin.right,
                   height = 500 - margin.top - margin.bottom;
 
 	// define svg
@@ -21,7 +21,7 @@ function load() {
 
 		
 	// Define color scales
-    var colorScale = d3.scale.category10();
+    var colorScale = d3.scale.category20();
 
 	// define the x y scales
 	var xScale = d3.scale.linear()
@@ -41,7 +41,7 @@ function load() {
 		.orient("left");
 
 	//import the data
-	d3.csv("World_Happiness_GDP_2017.csv", function(error, data){
+	d3.csv("World_Happiness_GDP_2017.csv", function(error, data) {
 
 		// check for errors
 		if(error) console.log("Error: data not loaded")
@@ -87,19 +87,17 @@ function load() {
             .attr("class", "tooltip")
             .style("opacity", 0);
 
-        // tooltip mouseover event handler
+        // tooltip Mouse Over info
         var tipMouseover = function(d) {
             var color = colorScale(d.Country);
             var html  = "<span style='color:" + color + ";'>" + d.Country + "</span><br/>" +
-                        "<b>" + d.Score + "</b> Happiness Score, <b/>" + d.GDP + "</b> GDP";
-
+                        "<b>" + d.Score + "</b> Happiness Score, <b/>" + d.GDP + "</b> GDP"; 
             tooltip.html(html)
-                .style("left", (d3.event.pageX + 15) + "px")
-                .style("top", (d3.event.pageY - 28) + "px")
+                .style("left", (d3.event.pageX + 10) + "px")
+                .style("top", (d3.event.pageY - 30) + "px")
                .transition()
-                .duration(200) 
+                .duration(400) 
                 .style("opacity", 1) 
-
         };
         
         // tooltip mouseout event handler
@@ -109,17 +107,17 @@ function load() {
                 .style("opacity", 0);
         };
 
-		// Add data points!
+		// Add data points
         svg.selectAll(".dot")
             .data(data)
            .enter().append("circle")
-            .attr("class", "dot")
-            .attr("r", 5.5) // radius size, could map to another data dimension
-            .attr("cx", function(d) { return xScale( d.GDP ); })     // x position
-            .attr("cy", function(d) { return yScale( d.Score ); })  // y position
-            .style("fill", function(d) { return colorScale(d.Country); })
+            .attr("class", "data")
+            .attr("r", 2) 
+            .attr("cx", function(d) { return xScale( d.GDP ); })   
+            .attr("cy", function(d) { return yScale( d.Score ); }) 
+            .style("fill", function(d) { return colorScale( d.Country ); })
             .on("mouseover", tipMouseover)
             .on("mouseout", tipMouseout);
 	});
 
-}
+};
