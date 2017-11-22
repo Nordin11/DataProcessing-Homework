@@ -61,6 +61,7 @@ function load() {
 	    	.attr("class", "x axis")
 	        .attr("transform", "translate(0," + height + ")") 
 	        .call(xAxis)
+	        .style("font-size", "11px")
 	       // add x axis label
 	       .append("text")
 	        .attr("class", "label")
@@ -73,12 +74,13 @@ function load() {
 		svg.append("g")
             .attr("class", "y axis")
             .call(yAxis)
+            .style("font-size", "11px")
            .append("text")
             .attr("class", "label")
             .attr("transform", "rotate(-90)")
             .attr("y", 15) 
             .style("text-anchor", "end")
-            .text("Happiness Scorrrre");
+            .text("Happiness Score");
 
         // Add tooltip
         var tooltip = d3.select("#container").append("div")
