@@ -53,8 +53,8 @@ function load() {
 		});
 
 		// specify the domains of xscale yscale
-		xScale.domain([0, d3.max(data, function(d) { return d.GDP; }) ] );
-		yScale.domain([0, d3.max(data, function(d) { return d.Score; }) ] );
+		xScale.domain([0, d3.max(data, function(d) { return d.GDP; }) + 0.2 ] );
+		yScale.domain([0, d3.max(data, function(d) { return d.Score; }) + 1 ] );
 
 		// Add xAxis to svg       
     	svg.append("g")
