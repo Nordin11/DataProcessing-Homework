@@ -21,7 +21,7 @@ function load() {
 
 		
 	// Define color scales
-    var colorScale = d3.scale.category20();
+    var colorScale = d3.scale.category10();
 
 	// define the x y scales
 	var xScale = d3.scale.linear()
@@ -138,7 +138,7 @@ function load() {
       		.attr("y", 9)
       		.attr("dy", ".35em")
       		.style("text-anchor", "end")
-      		.text(function(d) { return d.Continent; });
+      		.text(function(d) { return d; });
 	});
 
 };
