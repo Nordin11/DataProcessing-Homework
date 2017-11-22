@@ -22,3 +22,16 @@ svg {
 	stroke: #000;
 	shape-rendering: crispEdges;
 }
+
+.label {
+	font-size: 11px;
+}
+
+.tooltip {
+	position: absolute;
+	font-size: 10px;
+	width: auto;
+	height: auto;
+	pointer-events: none;
+	background-color: #fff;
+}

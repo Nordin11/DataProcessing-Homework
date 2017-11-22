@@ -9,7 +9,7 @@ function load() {
                   height = 500 - margin.top - margin.bottom;
 
 	// define svg
-	var svg = d3.select("body")
+	var svg = d3.select("#container")
 		.append("svg")
 		// group attributes together
 		.attr ({
@@ -56,11 +56,12 @@ function load() {
 		xScale.domain([0, d3.max(data, function(d) { return d.GDP; }) ] );
 		yScale.domain([0, d3.max(data, function(d) { return d.Score; }) ] );
 
-		// Add x-axis to the canvas            
+		// Add xAxis to svg       
     	svg.append("g")
 	    	.attr("class", "x axis")
 	        .attr("transform", "translate(0," + height + ")") 
 	        .call(xAxis)
+	        .style("font-size", "11px")
 	       // add x axis label
 	       .append("text")
 	        .attr("class", "label")
@@ -68,6 +69,58 @@ function load() {
 	        .attr("y", -6)    
 	        .style("text-anchor", "end") 
 	        .text("GDP");
+		
+		// Add yAxis to svg 
+		svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+           .append("text")
+            .attr("class", "label")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 15) 
+            .style("text-anchor", "end")
+            .text("Happiness Score");
+
+  		// Add the tooltip container to the vis container
+        // it's invisible and its position/contents are defined during mouseover
+        var tooltip = d3.select("#vis-container").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        // tooltip mouseover event handler
+        var tipMouseover = function(d) {
+            var color = colorScale(d.Country);
+            var html  = d.Country + "<br/>" +
+                          "<span style='color:" + color + ";'>" + d.Country + "</span><br/>" +
+                          "<b>" + d.Score + "</b> Happiness Score, <b/>" + d.GDP + "</b> GDP";
+
+            tooltip.html(html)
+                .style("left", (d3.event.pageX + 15) + "px")
+                .style("top", (d3.event.pageY - 28) + "px")
+               .transition()
+                .duration(200) 
+                .style("opacity", .9) 
+
+        };
+        
+        // tooltip mouseout event handler
+        var tipMouseout = function(d) {
+            tooltip.transition()
+                .duration(300)
+                .style("opacity", 0);
+        };
+
+		// Add data points!
+        svg.selectAll(".dot")
+            .data(data)
+           .enter().append("circle")
+            .attr("class", "dot")
+            .attr("r", 5.5) // radius size, could map to another data dimension
+            .attr("cx", function(d) { return xScale( d.GDP ); })     // x position
+            .attr("cy", function(d) { return yScale( d.Score ); })  // y position
+            .style("fill", function(d) { return colorScale(d.Country); })
+            .on("mouseover", tipMouseover)
+            .on("mouseout", tipMouseout);
 	});
 
 }
