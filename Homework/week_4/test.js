@@ -5,7 +5,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     if (error) throw error;    
     document.body.appendChild(xml.documentElement);
  
-    d3.select("svg")
+    var svg = d3.select("svg")
     	.append("rect")
     	.attr("id", "kleur1")
     	.attr({
@@ -17,8 +17,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	.attr("class", "st1")
     	.style("fill", "#ccece6")
 
-    d3.select("svg")
-    	.append("rect")
+    svg.append("rect")
     	.attr("id", "kleur2")
     	.attr({
     		"x":13,
@@ -29,8 +28,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	.attr("class", "st1")
     	.style("fill", "#99d8c9")
 
-    d3.select("svg")
-    	.append("rect")
+    svg.append("rect")
     	.attr("id", "kleur3")
     	.attr({
     		"x":13,
@@ -41,8 +39,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	.attr("class", "st1")
     	.style("fill", "#66c2a4")
 
-    d3.select("svg")
-    	.append("rect")
+    svg.append("rect")
     	.attr("id", "kleur4")
     	.attr({
     		"x":13,
@@ -53,8 +50,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	.attr("class", "st1")
     	.style("fill", "#41ae76");
     
-    d3.select("svg")
-    	.append("rect")
+    svg.append("rect")
     	.attr("id", "kleur5")
     	.attr({
     		"x":13,
@@ -65,8 +61,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	.attr("class", "st1")
     	.style("fill", "#238b45");
 
-   	d3.select("svg")
-    	.append("rect")
+    svg.append("rect")
     	.attr({
     		"x":46.5,
     		"y": 178.6,
@@ -75,8 +70,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	})
     	.attr("class", "st1");
 
-    d3.select("svg")
-    	.append("rect")
+    svg.append("rect")
     	.attr("id", "kleur6")
     	.attr({
     		"x":13,
@@ -87,9 +81,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	.attr("class", "st1")
     	.style("fill", "#005824");
 
-
-   	d3.select("svg")
-    	.append("rect")
+    svg.append("rect")
     	.attr({
     		"x":46.5,
     		"y": 218.5,
@@ -98,8 +90,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	})
     	.attr("class", "st1");
 
-	d3.select("svg")
-    	.append("rect")
+    svg.append("rect")
     	.attr("id", "kleur7")
     	.attr({
     		"x":13,
@@ -110,9 +101,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	.attr("class", "st1")
     	.style("fill", "#7f847f");
 
-
-   	d3.select("svg")
-    	.append("rect")
+    svg.append("rect")
     	.attr({
     		"x":46.5,
     		"y": 257.5,
@@ -121,8 +110,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	})
     	.attr("class", "st1");
 
-	d3.select("svg")
-    	.append("text")
+    svg.append("text")
     	.attr("id", "tekst1")
     	.attr({
     		"x":60,
@@ -130,8 +118,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	})
     	.text("100");
 
-	d3.select("svg")
-    	.append("text")
+    svg.append("text")
     	.attr("id", "tekst2")
     	.attr({
     		"x":60,
@@ -139,8 +126,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	})
     	.text("1000");
 
-	d3.select("svg")
-    	.append("text")
+    svg.append("text")
     	.attr("id", "tekst1")
     	.attr({
     		"x":60,
@@ -148,8 +134,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	})
     	.text("10000");
 
-	d3.select("svg")
-    	.append("text")
+    svg.append("text")
     	.attr("id", "tekst1")
     	.attr({
     		"x":60,
@@ -157,8 +142,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	})
     	.text("100000");
 
-	d3.select("svg")
-    	.append("text")
+    svg.append("text")
     	.attr("id", "tekst1")
     	.attr({
     		"x":60,
@@ -166,8 +150,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	})
     	.text("1000000");
 
-   	d3.select("svg")
-    	.append("text")
+    svg.append("text")
     	.attr("id", "tekst1")
     	.attr({
     		"x":60,
@@ -175,8 +158,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	})
     	.text("10000000");
 
-	d3.select("svg")
-    	.append("text")
+    svg.append("text")
     	.attr("id", "tekst1")
     	.attr({
     		"x":60,

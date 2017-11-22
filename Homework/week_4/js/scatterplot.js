@@ -120,13 +120,13 @@ function load() {
             .on("mouseover", tipMouseover)
             .on("mouseout", tipMouseout);
   		
-
+        // Add legens
   		var legend = svg.selectAll(".legend")
       		.data(colorScale.domain())
     		.enter().append("g")
       		.attr("class", "legend")
       		.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-
+      	
   		legend.append("rect")
       		.attr("x", width - 15)
       		.attr("width", 15)
