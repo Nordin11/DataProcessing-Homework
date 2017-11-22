@@ -52,7 +52,10 @@ svg {
 	width: auto;
 	height: auto;
 	pointer-events: none;
-	background-color: #c5c7cc;
+	background-color: #fff;
+	border: 1px solid;
+	padding: 8px 20px; 
+  	border-radius: 10px;
 }
 
 .data {
