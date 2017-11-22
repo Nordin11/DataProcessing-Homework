@@ -5,7 +5,7 @@ function load() {
 
 	// define margins 
 	var margin = { top: 20, right: 20, bottom: 30, left: 40 },
-                  width  = 800 - margin.left - margin.right,
+                  width  = 880 - margin.left - margin.right,
                   height = 500 - margin.top - margin.bottom;
 
 	// define svg
