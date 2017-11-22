@@ -68,7 +68,7 @@ function load() {
 	        .attr("x", width) 
 	        .attr("y", -6)    
 	        .style("text-anchor", "end") 
-	        .text("GDP");
+	        .text("GDP per capita");
 		
 		// Add yAxis to svg 
 		svg.append("g")
@@ -120,20 +120,23 @@ function load() {
             .on("mouseout", tipMouseout);
   		
   		var legend = svg.selectAll(".legend")
+      		.data(colorScale.domain())
+    		.enter().append("g")
+      		.attr("class", "legend")
+      		.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
   		legend.append("rect")
-  			.attr("class", "legend")
-      		.attr("x", width - 18)
-      		.attr("width", 18)
-      		.attr("height", 18)
-      		.style("fill", "white");
+      		.attr("x", width - 15)
+      		.attr("width", 15)
+      		.attr("height", 15)
+      		.style("fill", colorScale);
 
   		legend.append("text")
-      		.attr("x", width - 24)
+      		.attr("x", width - 26)
       		.attr("y", 9)
       		.attr("dy", ".35em")
       		.style("text-anchor", "end")
-      		.text("Country");
+      		.text(function(d) { return d; });
 	});
 
 };

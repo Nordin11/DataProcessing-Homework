@@ -70,7 +70,5 @@ svg {
 }
 
 .legend {
-	border: 1px solid;
-	padding: 8px 20px; 
-  	border-radius: 10px;
+	font-size: 10px;
 }
