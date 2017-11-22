@@ -49,7 +49,7 @@ svg {
 .tooltip {
 	position: absolute;
 	font-size: 10px;
-	color: #fff;
+	color: #000;
 	width: auto;
 	height: auto;
 	pointer-events: none;
