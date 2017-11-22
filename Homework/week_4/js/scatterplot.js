@@ -73,6 +73,7 @@ function load() {
 		// Add yAxis to svg 
 		svg.append("g")
             .attr("class", "y axis")
+            .style("font-size", "11px")
             .call(yAxis)
            .append("text")
             .attr("class", "label")
@@ -99,7 +100,7 @@ function load() {
                 .style("top", (d3.event.pageY - 28) + "px")
                .transition()
                 .duration(200) 
-                .style("opacity", .9) 
+                .style("opacity", 1) 
 
         };
         
