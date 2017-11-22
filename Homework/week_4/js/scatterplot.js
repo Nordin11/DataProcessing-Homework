@@ -90,7 +90,8 @@ function load() {
         // tooltip Mouse Over info
         var tipMouseover = function(d) {
             var color = colorScale(d.Country);
-            var html  = "<span style='color:" + color + ";'>" + d.Country + "</span><br/>" +
+            var html  = d.Country + "<br/>" +
+            			"<span style='color:" + color + ";'>" + d.Continent + "</span><br/>" +
                         "<b>" + d.Score + "</b> Happiness Score, <b/>" + d.GDP + "</b> GDP"; 
             tooltip.html(html)
                 .style("left", (d3.event.pageX + 10) + "px")
@@ -115,10 +116,11 @@ function load() {
             .attr("r", 5) 
             .attr("cx", function(d) { return xScale( d.GDP ); })   
             .attr("cy", function(d) { return yScale( d.Score ); }) 
-            .style("fill", function(d) { return colorScale( d.Country ); })
+            .style("fill", function(d) { return colorScale( d.Continent ); })
             .on("mouseover", tipMouseover)
             .on("mouseout", tipMouseout);
   		
+
   		var legend = svg.selectAll(".legend")
       		.data(colorScale.domain())
     		.enter().append("g")
@@ -136,7 +138,7 @@ function load() {
       		.attr("y", 9)
       		.attr("dy", ".35em")
       		.style("text-anchor", "end")
-      		.text(function(d) { return d; });
+      		.text(function(d) { return d.Continent; });
 	});
 
 };
