@@ -112,7 +112,7 @@ function load() {
             .data(data)
            .enter().append("circle")
             .attr("class", "data")
-            .attr("r", 2) 
+            .attr("r", 5) 
             .attr("cx", function(d) { return xScale( d.GDP ); })   
             .attr("cy", function(d) { return yScale( d.Score ); }) 
             .style("fill", function(d) { return colorScale( d.Country ); })
