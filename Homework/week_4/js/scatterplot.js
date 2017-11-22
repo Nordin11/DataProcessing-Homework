@@ -120,7 +120,7 @@ function load() {
             .on("mouseover", tipMouseover)
             .on("mouseout", tipMouseout);
   		
-        // Add legens
+        // Add legend
   		var legend = svg.selectAll(".legend")
       		.data(colorScale.domain())
     		.enter().append("g")
