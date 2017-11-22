@@ -78,7 +78,7 @@ function load() {
             .attr("transform", "rotate(-90)")
             .attr("y", 15) 
             .style("text-anchor", "end")
-            .text("Happiness Score");
+            .text("Happiness Scorrrre");
 
         // Add tooltip
         var tooltip = d3.select("#container").append("div")
