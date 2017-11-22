@@ -68,3 +68,9 @@ svg {
 .data {
 	stroke: none;
 }
+
+.legend {
+	border: 1px solid;
+	padding: 8px 20px; 
+  	border-radius: 10px;
+}
