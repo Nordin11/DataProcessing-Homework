@@ -73,8 +73,8 @@ function load() {
 		// Add yAxis to svg 
 		svg.append("g")
             .attr("class", "y axis")
-            .style("font-size", "11px")
             .call(yAxis)
+            .style("font-size", "11px")
            .append("text")
             .attr("class", "label")
             .attr("transform", "rotate(-90)")
@@ -82,9 +82,8 @@ function load() {
             .style("text-anchor", "end")
             .text("Happiness Score");
 
-  		// Add the tooltip container to the vis container
-        // it's invisible and its position/contents are defined during mouseover
-        var tooltip = d3.select("#vis-container").append("div")
+        // Add tooltip
+        var tooltip = d3.select("#container").append("div")
             .attr("class", "tooltip")
             .style("opacity", 0);
 
