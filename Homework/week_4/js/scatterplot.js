@@ -90,9 +90,8 @@ function load() {
         // tooltip mouseover event handler
         var tipMouseover = function(d) {
             var color = colorScale(d.Country);
-            var html  = d.Country + "<br/>" +
-                          "<span style='color:" + color + ";'>" + d.Country + "</span><br/>" +
-                          "<b>" + d.Score + "</b> Happiness Score, <b/>" + d.GDP + "</b> GDP";
+            var html  = "<span style='color:" + color + ";'>" + d.Country + "</span><br/>" +
+                        "<b>" + d.Score + "</b> Happiness Score, <b/>" + d.GDP + "</b> GDP";
 
             tooltip.html(html)
                 .style("left", (d3.event.pageX + 15) + "px")
