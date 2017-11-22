@@ -4,8 +4,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
 	// check for errors
     if (error) throw error;    
     document.body.appendChild(xml.documentElement);
-
-   
+ 
     d3.select("svg")
     	.append("rect")
     	.attr("id", "kleur1")
@@ -122,8 +121,6 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	})
     	.attr("class", "st1");
 
-
-
 	d3.select("svg")
     	.append("text")
     	.attr("id", "tekst1")
@@ -132,7 +129,6 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     		"y": 35,
     	})
     	.text("100");
-
 
 	d3.select("svg")
     	.append("text")
@@ -143,7 +139,6 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     	})
     	.text("1000");
 
-
 	d3.select("svg")
     	.append("text")
     	.attr("id", "tekst1")
@@ -152,7 +147,6 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     		"y": 118,
     	})
     	.text("10000");
-
 
 	d3.select("svg")
     	.append("text")
