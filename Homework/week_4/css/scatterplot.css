@@ -1,0 +1,24 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	font-family: 'Comfortaa' cursive;
+	font-size: 30px;
+}
+
+svg {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	background-color: 'black';
+} 
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}

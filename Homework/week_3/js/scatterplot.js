@@ -14,13 +14,17 @@ function load() {
 		// group attributes together
 		.attr ({
 			"width": width + margin.right + margin.left,
-			"height": height + margin.top + margin.bottom
+			"height":height + margin.top + margin.bottom
 		})
 			.append("g")
 				.attr("transform", "translate(" + margin.left + ',' + margin.right + ')');
 
+	var rect = svg.append("rect")
+				.attr("width", 100)
+				.attr("height", 100)
+				.attr("fill", "blue");
 		
-	// Define color scales
+	// Define our scales
     var colorScale = d3.scale.category10();
 
 	// define the x y scales
@@ -52,22 +56,21 @@ function load() {
 			d.GDP = +d.GDP;
 		});
 
-		// specify the domains of xscale yscale
-		xScale.domain([0, d3.max(data, function(d) { return d.GDP; }) ] );
-		yScale.domain([0, d3.max(data, function(d) { return d.Score; }) ] );
+	// specify the domains of xscale yscale
+	xScale.domain([0, d3.max(data, function(d) { return d.GDP; }) ] );
+	yScale.domain([0, d3.max(data, function(d) { return d.Score; }) ] );
 
-		// Add x-axis to the canvas            
-    	svg.append("g")
-	    	.attr("class", "x axis")
-	        .attr("transform", "translate(0," + height + ")") 
-	        .call(xAxis)
-	       // add x axis label
-	       .append("text")
-	        .attr("class", "label")
-	        .attr("x", width) 
-	        .attr("y", -6)    
-	        .style("text-anchor", "end") 
-	        .text("GDP");
-	});
-
-}
+	// Add x-axis to the canvas            
+    svg.append("g")
+    	.attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")") 
+        .call(xAxis)
+       // add x axis label
+       .append("text")
+        .attr("class", "label")
+        .attr("x", width) 
+        .attr("y", -6)    
+        .style("text-anchor", "end") 
+        .text("GDP");
+        
+};
