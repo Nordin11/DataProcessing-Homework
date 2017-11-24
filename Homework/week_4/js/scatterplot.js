@@ -42,15 +42,14 @@ function load() {
 
 	//import the data
 	d3.csv("World_Happiness_GDP_2017.csv", function(error, data) {
-
+	
 		// check for errors
 		if(error) console.log("Error: data not loaded")
 
 		// convert data in proper format
 		data.forEach(function(d) {
 			d.Score = +d.Score;
-			d.GDP = +d.GDP;
-		});
+			d.GDP = +d.GDP; });
 
 		// specify the domains of xscale yscale
 		xScale.domain([0, d3.max(data, function(d) { return d.GDP; }) + 0.2 ] );
@@ -98,14 +97,14 @@ function load() {
                 .style("top", (d3.event.pageY - 30) + "px")
                .transition()
                 .duration(400) 
-                .style("opacity", 1) 
+                .style("opacity", 1); 
         };
         
         // tooltip mouseout event handler
         var tipMouseout = function(d) {
             tooltip.transition()
                 .duration(300)
-                .style("opacity", 0);
+                .style("opacity", 0); 
         };
 
 		// Add data points
@@ -126,7 +125,7 @@ function load() {
     		.enter().append("g")
       		.attr("class", "legend")
       		.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-      	
+
   		legend.append("rect")
       		.attr("x", width - 15)
       		.attr("width", 15)

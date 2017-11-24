@@ -1,4 +1,6 @@
-
+/*******************************/
+/* Nordin Bouchrit 11050608 ***/
+/*****************************/
 d3.xml("test.svg", "image/svg+xml", function(error, xml) {
 
 	// check for errors
