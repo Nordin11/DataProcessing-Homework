@@ -5,7 +5,7 @@ function load() {
 
 	// define margins 
 	var margin = { top: 20, right: 10, bottom: 100, left: 40 },
-		width = 700 - margin.right - margin.left,
+		width = 900 - margin.right - margin.left,
 		height = 500 - margin.top - margin.bottom;
 
 	// define svg
@@ -55,8 +55,8 @@ function load() {
 		});	
 
 		// specify the domains of xscale yscale
-		xScale.domain(data.map(function(d) { return d.Date; }) );
-		yScale.domain( [ 0, d3.max(data, function(d) { return d.High; }) ] );
+		xScale.domain(data.map(function(d) { return d.Date; }) +0.2 );
+		yScale.domain( [ 0, d3.max(data, function(d) { return d.High; }) + 1 ] );
 
 		// Add xAxis to svg       
     	svg.append("g")
