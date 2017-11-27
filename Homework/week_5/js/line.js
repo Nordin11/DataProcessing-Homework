@@ -42,7 +42,7 @@ function load() {
 
 
 	//import the data
-	d3.csv("BTC USD Historical Data.json", function(error, data){
+	d3.csv("BTC USD Historical Data.csv", function(error, data){
 		
 		// check for errors
 		if(error) console.log("Error: data not loaded")
