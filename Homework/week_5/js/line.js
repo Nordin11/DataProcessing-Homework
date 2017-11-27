@@ -56,9 +56,7 @@ function load() {
 
 		// specify the domains of xscale yscale
 		xScale.domain(data.map(function(d) { return d.Date; }) );
-		yScale.domain([
-			d3.min(data, function(d) { return d.Low; }) 
-			d3.max(data, function(d) { return d.High; }) ] );
+		yScale.domain( [ 0, d3.max(data, function(d) { return d.High; }) ] );
 
 		// Add xAxis to svg       
     	svg.append("g")
@@ -88,20 +86,6 @@ function load() {
 
 	});
 }
-
-
-/* Used sources: 
-
-https://stackoverflow.com/questions/10893004/d3-transform-scale-and-translate
-https://github.com/d3/d3-3.x-api-reference/blob/master/API-Reference.md
-https://www.w3schools.com/jsref/jsref_pop.asp
-https://bost.ocks.org/mike/bar/
-https://bost.ocks.org/mike/bar/2/
-https://bost.ocks.org/mike/bar/3/
-
-*/ 
-
-
 
 
 
