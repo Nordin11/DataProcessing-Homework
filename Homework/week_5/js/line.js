@@ -19,27 +19,32 @@ function load() {
 			.append("g")
 				.attr("transform", "translate(" + margin.left + ',' + margin.right + ')');
 
+	// Define color scale
+    var color = d3.scaleOrdinal(d3.SchemeCategory10);
 
-	// Define color scales
-    var colorScale = d3.scale.category10();
+    // parse date
+	var DateParse = d3.timeParse("%B %Y");
 
 	// define the x y scales
-	var xScale = d3.scale.ordinal()
-		.rangeRoundBands([0,width], 0.2, 0.2);
+	var xScale = d3.scaleTime()
+		.range([0,width]);
 		
-	var yScale = d3.scale.linear()
+	var yScale = d3.scaleLinear()
 		// make sure the height goes upwards in stead of top to bottom
 		.range([height, 0]);
 
-	// define x and y axis
-	var xAxis = d3.svg.axis()
-		.scale(xScale)
-		.orient("bottom");
+	// Define the lines
+	var priceline = d3.line()	
+    	.xScale(function(d) { return xScale(d.Date); })
+    	.yScale(function(d) { return yScale(d.Price); });
 
-	var yAxis = d3.svg.axis()
-		.scale(yScale)
-		.orient("left");
+	var highline = d3.line()	
+    	.xScale(function(d) { return xScale(d.Date); })
+    	.yScale(function(d) { return yScale(d.High); });
 
+    var lowline = d3.line()
+    	.xScale(function(d) { return xScale(d.Date); })
+    	.yScale(function(d) { return yScale(d.Low); });
 
 	//import the data
 	d3.csv("BTC USD Historical Data.csv", function(error, data){
@@ -49,40 +54,28 @@ function load() {
 
 		// convert data in proper format
 		data.forEach(function(d) {
+			d.Date = DateParse(d.date);
 			d.High = +d.High;
 			d.Price = +d.Price;
 			d.Low = +d.Low;
 		});	
 
 		// specify the domains of xscale yscale
-		xScale.domain(data.map(function(d) { return d.Date; }) + 1);
-		yScale.domain( [ 0, d3.max(data, function(d) { return d.High; }) + 1 ] );
+		xScale.domain(d3.extent(date, function(d) { return d.Date; }));
+		yScale.domain( [ 0, d3.max(data, function(d) { return d.High; }) ] );
 
 		// Add xAxis to svg       
     	svg.append("g")
 	    	.attr("class", "x axis")
 	        .attr("transform", "translate(0," + height + ")") 
-	        .call(xAxis)
-	        .style("font-size", "11px")
-	       // add x axis label
-	       .append("text")
-	        .attr("class", "label")
-	        .attr("x", width) 
-	        .attr("y", -6)    
-	        .style("text-anchor", "end") 
-	        .text("Date");
-		
+	        .call(d3.axisBottom(x))
+
 		// Add yAxis to svg 
 		svg.append("g")
             .attr("class", "y axis")
             .call(yAxis)
             .style("font-size", "11px")
-           .append("text")
-            .attr("class", "label")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 15) 
-            .style("text-anchor", "end")
-            .text("Price ($)");
+        	.call(d3.axisLeft(y));
 
 	});
 }
