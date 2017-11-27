@@ -22,8 +22,6 @@ function load() {
 	// Define color scale
     var color = d3.scaleOrdinal(d3.SchemeCategory10);
 
-    // parse date
-	var DateParse = d3.timeParse("%B %Y");
 
 	// define the x y scales
 	var xScale = d3.scale.ordinal()
@@ -63,14 +61,13 @@ function load() {
 
 		// convert data in proper format
 		data.forEach(function(d) {
-			d.Date = DateParse(d.date);
 			d.High = +d.High;
 			d.Price = +d.Price;
 			d.Low = +d.Low;
 		});	
 
 		// specify the domains of xscale yscale
-		xScale.domain(d3.extent(date, function(d) { return d.Date; }));
+		xScale.domain(d3.extent(data, function(d) { return d.Date; }));
 		yScale.domain( [ 0, d3.max(data, function(d) { return d.High; }) + 1 ] );
 
 		// Add xAxis to svg       
