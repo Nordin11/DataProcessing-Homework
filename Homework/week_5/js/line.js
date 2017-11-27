@@ -33,6 +33,15 @@ function load() {
 		// make sure the height goes upwards in stead of top to bottom
 		.range([height, 0]);
 
+	// define x and y axis
+	var xAxis = d3.svg.axis()
+		.scale(xScale)
+		.orient("bottom");
+
+	var yAxis = d3.svg.axis()
+		.scale(yScale)
+		.orient("left");
+
 	// Define the lines
 	var priceline = d3.line()	
     	.xScale(function(d) { return xScale(d.Date); })
@@ -62,20 +71,33 @@ function load() {
 
 		// specify the domains of xscale yscale
 		xScale.domain(d3.extent(date, function(d) { return d.Date; }));
-		yScale.domain( [ 0, d3.max(data, function(d) { return d.High; }) ] );
+		yScale.domain( [ 0, d3.max(data, function(d) { return d.High; }) + 1 ] );
 
 		// Add xAxis to svg       
     	svg.append("g")
 	    	.attr("class", "x axis")
 	        .attr("transform", "translate(0," + height + ")") 
-	        .call(d3.axisBottom(x))
-
+	        .call(xAxis)
+	        .style("font-size", "11px")
+	       // add x axis label
+	       .append("text")
+	        .attr("class", "label")
+	        .attr("x", width) 
+	        .attr("y", -6)    
+	        .style("text-anchor", "end") 
+	        .text("Date");
+		
 		// Add yAxis to svg 
 		svg.append("g")
             .attr("class", "y axis")
             .call(yAxis)
             .style("font-size", "11px")
-        	.call(d3.axisLeft(y));
+           .append("text")
+            .attr("class", "label")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 15) 
+            .style("text-anchor", "end")
+            .text("Price ($)");
 
 	});
 }
