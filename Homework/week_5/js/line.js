@@ -5,7 +5,7 @@ function load() {
 
 	// define margins 
 	var margin = { top: 20, right: 10, bottom: 100, left: 40 },
-		width = 900 - margin.right - margin.left,
+		width = 700 - margin.right - margin.left,
 		height = 500 - margin.top - margin.bottom;
 
 	// define svg
@@ -19,9 +19,9 @@ function load() {
 			.append("g")
 				.attr("transform", "translate(" + margin.left + ',' + margin.right + ')');
 
-	// Define color scale
-    var color = d3.scaleOrdinal(d3.SchemeCategory10);
 
+	// Define color scales
+    var colorScale = d3.scale.category10();
 
 	// define the x y scales
 	var xScale = d3.scale.ordinal()
@@ -40,21 +40,9 @@ function load() {
 		.scale(yScale)
 		.orient("left");
 
-	// Define the lines
-	var priceline = d3.line()	
-    	.xScale(function(d) { return xScale(d.Date); })
-    	.yScale(function(d) { return yScale(d.Price); });
-
-	var highline = d3.line()	
-    	.xScale(function(d) { return xScale(d.Date); })
-    	.yScale(function(d) { return yScale(d.High); });
-
-    var lowline = d3.line()
-    	.xScale(function(d) { return xScale(d.Date); })
-    	.yScale(function(d) { return yScale(d.Low); });
 
 	//import the data
-	d3.csv("BTC USD Historical Data.csv", function(error, data){
+	d3.csv("BTC USD Historical Data.json", function(error, data){
 		
 		// check for errors
 		if(error) console.log("Error: data not loaded")
@@ -67,8 +55,10 @@ function load() {
 		});	
 
 		// specify the domains of xscale yscale
-		xScale.domain(d3.extent(data, function(d) { return d.Date; }));
-		yScale.domain( [ 0, d3.max(data, function(d) { return d.High; }) + 1 ] );
+		xScale.domain(data.map(function(d) { return d.Date; }) );
+		yScale.domain([
+			d3.min(data, function(d) { return d.Low; }) 
+			d3.max(data, function(d) { return d.High; }) ] );
 
 		// Add xAxis to svg       
     	svg.append("g")
