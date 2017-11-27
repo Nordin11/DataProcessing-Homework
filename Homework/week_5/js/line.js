@@ -42,7 +42,7 @@ function load() {
 
 
 	//import the data
-	d3.csv("BTC USD Historical Data.json", function(error, data){
+	d3.csv("BTC USD Historical Data.csv", function(error, data){
 		
 		// check for errors
 		if(error) console.log("Error: data not loaded")
@@ -55,7 +55,7 @@ function load() {
 		});	
 
 		// specify the domains of xscale yscale
-		xScale.domain(data.map(function(d) { return d.Date; }) +0.2 );
+		xScale.domain(data.map(function(d) { return d.Date; }) + 1);
 		yScale.domain( [ 0, d3.max(data, function(d) { return d.High; }) + 1 ] );
 
 		// Add xAxis to svg       
