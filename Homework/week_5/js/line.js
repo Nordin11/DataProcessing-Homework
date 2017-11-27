@@ -19,6 +19,10 @@ function load() {
 			.append("g")
 				.attr("transform", "translate(" + margin.left + ',' + margin.right + ')');
 
+
+	// Define color scales
+    var colorScale = d3.scale.category10();
+
 	// define the x y scales
 	var xScale = d3.scale.ordinal()
 		.rangeRoundBands([0,width], 0.2, 0.2);
