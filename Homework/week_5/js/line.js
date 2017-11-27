@@ -24,8 +24,8 @@ function load() {
     var colorScale = d3.scale.category10();
 
 	// define the x y scales
-	var xScale = d3.scaleBand()
-		.rangeRound([0,width]);
+	var xScale = d3.scale.ordinal()
+		.rangeRoundBands([0,width], 0.2, 0.2);
 		
 	var yScale = d3.scale.linear()
 		// make sure the height goes upwards in stead of top to bottom
