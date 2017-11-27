@@ -26,10 +26,10 @@ function load() {
 	var DateParse = d3.timeParse("%B %Y");
 
 	// define the x y scales
-	var xScale = d3.scaleTime()
-		.range([0,width]);
+	var xScale = d3.scale.ordinal()
+		.rangeRoundBands([0,width], 0.2, 0.2);
 		
-	var yScale = d3.scaleLinear()
+	var yScale = d3.scale.linear()
 		// make sure the height goes upwards in stead of top to bottom
 		.range([height, 0]);
 
