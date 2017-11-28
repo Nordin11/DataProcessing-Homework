@@ -43,16 +43,16 @@ function load() {
 		.orient("left");
 
 	// define lines
-	var priceline = d3.line()
-		.xScale(function(d) { return xScale(d.Date); })
+	var priceline = d3.svg.line()
+		.xScale(function(d) { return xScale(formatDate.parse(d.Date)); })
 		.yScale(function(d) { return yScale(d.Price); });
 
-	var lowline = d3.line()
-		.xScale(function(d) { return xScale(d.Date); })
+	var lowline = d3.svg.line()
+		.xScale(function(d) { return xScale(formatDate.parse(d.Date)); })
 		.yScale(function(d) { return yScale(d.Low); });
 
-	var highline = d3.line()
-		.xScale(function(d) { return xScale(d.Date); })
+	var highline = d3.svg.line()
+		.xScale(function(d) { return xScale(formatDate.parse(d.Date)); })
 		.yScale(function(d) { return yScale(d.High); });
 
 	//import the data
@@ -67,14 +67,12 @@ function load() {
 			d.Low = +d.Low;
 		});	
 
-		d.Date = formatDate.parse(d.Date);
-
-		console.log(d.Date);
+		console.log(formatDate.parse(d.Date));
 
 		// specify the domains of xscale yscale
-		xScale.domain(d3.extent(data, function(d) { return d.Date; }) );
+		xScale.domain(d3.extent(data, function(d) { return formatDate.parse(d.Date); }) );
 		yScale.domain([ 
-			d3.min(data, function(d) { return d.temperature; }),
+			d3.min(data, function(d) { return d.Low; }),
 			d3.max(data, function(d) { return d.High; })
 		]);
 
