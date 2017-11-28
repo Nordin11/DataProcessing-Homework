@@ -18,9 +18,6 @@ function load() {
 
 	var parseTime = d3.timeParse("%b-%y");
 
-	// Define color scales
-    var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-
 	// define the x y scales
 	var x = d3.scaleTime()
 		.range([0, width]);
