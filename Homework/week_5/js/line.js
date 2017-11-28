@@ -20,38 +20,29 @@ function load() {
 				.attr("transform", "translate(" + margin.left + ',' + margin.right + ')');
 
 
-	var formatDate = d3.time.format("%b-%y");
+	var parseTime = d3.timeParse("%b-%y");
 
 	// Define color scales
     var colorScale = d3.scale.category10();
 
 	// define the x y scales
-	var xScale = d3.scale.ordinal()
-		.rangeRoundBands([0,width]);
+	var xScale = d3.scaleTime()
+		.range([0, width]);
 		
-	var yScale = d3.scale.linear()
+	var yScale = d3.scaleLinear()
 		// make sure the height goes upwards in stead of top to bottom
 		.range([height, 0]);
 
-	// define x and y axis
-	var xAxis = d3.svg.axis()
-		.scale(xScale)
-		.orient("bottom");
-
-	var yAxis = d3.svg.axis()
-		.scale(yScale)
-		.orient("left");
-
 	// define lines
-	var priceline = d3.svg.line()
+	var priceline = d3.line()
 		.xScale(function(d) { return xScale(d.Date); })
 		.yScale(function(d) { return yScale(d.Price); });
 
-	var lowline = d3.svg.line()
+	var lowline = d3.line()
 		.xScale(function(d) { return xScale(d.Date); })
 		.yScale(function(d) { return yScale(d.Low); });
 
-	var highline = d3.svg.line()
+	var highline = d3.line()
 		.xScale(function(d) { return xScale(d.Date); })
 		.yScale(function(d) { return yScale(d.High); });
 
@@ -62,10 +53,10 @@ function load() {
 
 		// convert data in proper format
 		data.forEach(function(d) {
+			d.Date = parseTime(d.Date);
 			d.High = +d.High;
 			d.Price = +d.Price;
 			d.Low = +d.Low;
-			d.Date = formatDate.parse(d.Date);
 		});	
 
 	
