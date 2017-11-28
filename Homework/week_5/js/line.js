@@ -20,6 +20,8 @@ function load() {
 				.attr("transform", "translate(" + margin.left + ',' + margin.right + ')');
 
 
+	var parseTime = d3.timeParse("%b-%y");
+
 	// Define color scales
     var colorScale = d3.scale.category10();
 
@@ -40,6 +42,19 @@ function load() {
 		.scale(yScale)
 		.orient("left");
 
+	// define lines
+	var priceline = d3.line()
+		.xScale(function(d) { return xScale(d.Date); })
+		.yScale(function(d) { return yScale(d.Price); });
+
+	var lowline = d3.line()
+		.xScale(function(d) { return xScale(d.Date); })
+		.yScale(function(d) { return yScale(d.Low); });
+
+	var highline = d3.line()
+		.xScale(function(d) { return xScale(d.Date); })
+		.yScale(function(d) { return yScale(d.High); });
+
 	//import the data
 	d3.csv("BTC USD Historical Data.csv", function(error, data){
 		// check for errors
@@ -47,10 +62,13 @@ function load() {
 
 		// convert data in proper format
 		data.forEach(function(d) {
+			d.Date = parseTime(d.Date);
 			d.High = +d.High;
 			d.Price = +d.Price;
 			d.Low = +d.Low;
 		});	
+
+		console.log(d.Date);
 
 		// specify the domains of xscale yscale
 		xScale.domain(d3.extent(data, function(d) { return d.Date; }) );
