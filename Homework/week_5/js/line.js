@@ -38,8 +38,11 @@ function load() {
 			d.Price = +d.Price;
 			d.Low = +d.Low;
 		});	
-
-		console.log(typeof(Price))
+		
+		data.forEach(function(d){
+			console.log(typeof(d.Price))
+		});
+		
 
 		// define lines
 		var priceline = d3.line()
