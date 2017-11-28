@@ -9,10 +9,9 @@ function load() {
 		height = 500 - margin.top - margin.bottom;
 
 	// define svg
-	var svg = d3.select("#container")
-		.append("svg")
-		.attr ("width": width + margin.right + margin.left)
-		.attr("height": height + margin.top + margin.bottom)	
+	var svg = d3.select("#container").append("svg")
+		.attr("width", width + margin.right + margin.left)
+		.attr("height", height + margin.top + margin.bottom)	
 	  .append("g")
 		.attr("transform", 
 			  "translate(" + margin.left + ',' + margin.right + ')');
