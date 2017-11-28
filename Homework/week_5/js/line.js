@@ -44,15 +44,15 @@ function load() {
 
 	// define lines
 	var priceline = d3.svg.line()
-		.xScale(function(d) { return xScale(formatDate.parse(d.Date)); })
+		.xScale(function(d) { return xScale(d.Date); })
 		.yScale(function(d) { return yScale(d.Price); });
 
 	var lowline = d3.svg.line()
-		.xScale(function(d) { return xScale(formatDate.parse(d.Date)); })
+		.xScale(function(d) { return xScale(d.Date); })
 		.yScale(function(d) { return yScale(d.Low); });
 
 	var highline = d3.svg.line()
-		.xScale(function(d) { return xScale(formatDate.parse(d.Date)); })
+		.xScale(function(d) { return xScale(d.Date); })
 		.yScale(function(d) { return yScale(d.High); });
 
 	//import the data
@@ -65,12 +65,14 @@ function load() {
 			d.High = +d.High;
 			d.Price = +d.Price;
 			d.Low = +d.Low;
+			d.Date = formatDate.parse(d.Date);
 		});	
 
-		console.log(formatDate.parse(d.Date));
+	
+		console.log(d.Date);
 
 		// specify the domains of xscale yscale
-		xScale.domain(d3.extent(data, function(d) { return formatDate.parse(d.Date); }) );
+		xScale.domain(d3.extent(data, function(d) { return d.Date; }) );
 		yScale.domain([ 
 			d3.min(data, function(d) { return d.Low; }),
 			d3.max(data, function(d) { return d.High; })
