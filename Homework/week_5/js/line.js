@@ -25,7 +25,7 @@ function load() {
 
 	// define the x y scales
 	var xScale = d3.scale.ordinal()
-		.rangeRoundBands([0,width], 0.2, 0.2);
+		.rangeRoundBands([0,width]);
 		
 	var yScale = d3.scale.linear()
 		// make sure the height goes upwards in stead of top to bottom
@@ -40,10 +40,8 @@ function load() {
 		.scale(yScale)
 		.orient("left");
 
-
 	//import the data
 	d3.csv("BTC USD Historical Data.csv", function(error, data){
-		
 		// check for errors
 		if(error) console.log("Error: data not loaded")
 
@@ -55,10 +53,11 @@ function load() {
 		});	
 
 		// specify the domains of xscale yscale
-		xScale.domain(data.map(function(d) { return d.Date; }) );
-		yScale.domain([
-			d3.min(data, function(d) { return d.Low; }) 
-			d3.max(data, function(d) { return d.High; }) ] );
+		xScale.domain(d3.extent(data, function(d) { return d.Date; }) );
+		yScale.domain([ 
+			d3.min(data, function(d) { return d.temperature; }),
+			d3.max(data, function(d) { return d.High; })
+		]);
 
 		// Add xAxis to svg       
     	svg.append("g")
@@ -66,13 +65,6 @@ function load() {
 	        .attr("transform", "translate(0," + height + ")") 
 	        .call(xAxis)
 	        .style("font-size", "11px")
-	       // add x axis label
-	       .append("text")
-	        .attr("class", "label")
-	        .attr("x", width) 
-	        .attr("y", -6)    
-	        .style("text-anchor", "end") 
-	        .text("Date");
 		
 		// Add yAxis to svg 
 		svg.append("g")
