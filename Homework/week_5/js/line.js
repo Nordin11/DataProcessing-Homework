@@ -20,7 +20,7 @@ function load() {
 				.attr("transform", "translate(" + margin.left + ',' + margin.right + ')');
 
 
-	var parseTime = d3.timeParse("%b-%y");
+	var formatDate = d3.time.format("%b-%y");
 
 	// Define color scales
     var colorScale = d3.scale.category10();
@@ -62,11 +62,12 @@ function load() {
 
 		// convert data in proper format
 		data.forEach(function(d) {
-			d.Date = parseTime(d.Date);
 			d.High = +d.High;
 			d.Price = +d.Price;
 			d.Low = +d.Low;
 		});	
+
+		d.Date = formatDate.parse(d.Date);
 
 		console.log(d.Date);
 
