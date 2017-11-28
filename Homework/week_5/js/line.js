@@ -11,12 +11,9 @@ function load() {
 	// define svg
 	var svg = d3.select("#container")
 		.append("svg")
-		// group attributes together
-		.attr ({
-			"width": width + margin.right + margin.left,
-			"height": height + margin.top + margin.bottom
-		})
-	   .append("g")
+		.attr ("width": width + margin.right + margin.left)
+		.attr("height": height + margin.top + margin.bottom)	
+	  .append("g")
 		.attr("transform", 
 			  "translate(" + margin.left + ',' + margin.right + ')');
 
