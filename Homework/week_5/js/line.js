@@ -66,8 +66,8 @@ function load() {
     	svg.append("g")
 	    	.attr("class", "x axis")
 	        .attr("transform", "translate(0," + height + ")") 
-	        .call(d3.axisBottom(x));
-	        .style("font-size", "11px")
+	        .call(d3.axisBottom(x))
+	        .style("font-size", "11px");
 		
 		// Add yAxis to svg 
 		svg.append("g")
