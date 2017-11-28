@@ -57,6 +57,27 @@ function load() {
 		y.domain([0, d3.max(data, function(d) {
 			return Math.max(d.High) })]);
 
+        // add lines
+        svg.append("path")
+        	.data([data])
+        	.attr("class", "line")
+        	.style("stroke", "black")
+        	.attr("d", priceline);
+
+        // add lines
+        svg.append("path")
+        	.data([data])
+        	.attr("class", "line")
+        	.style("stroke", "green")
+        	.attr("d", highline);
+
+        // add lines
+        svg.append("path")
+        	.data([data])
+        	.attr("class", "line")
+        	.style("stroke", "red")
+        	.attr("d", lowline);
+
 		// Add xAxis to svg       
     	svg.append("g")
 	    	.attr("class", "x axis")
@@ -75,6 +96,7 @@ function load() {
             .attr("y", 15) 
             .style("text-anchor", "end")
             .text("Price ($)");
+
 
 	});
 }
