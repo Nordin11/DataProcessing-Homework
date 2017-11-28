@@ -22,25 +22,12 @@ function load() {
     var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
 	// define the x y scales
-	var xScale = d3.scaleTime()
+	var x = d3.scaleTime()
 		.range([0, width]);
 		
-	var yScale = d3.scaleLinear()
+	var y = d3.scaleLinear()
 		// make sure the height goes upwards in stead of top to bottom
 		.range([height, 0]);
-
-	// define lines
-	var priceline = d3.line()
-		.xScale(function(d) { return xScale(d.Date); })
-		.yScale(function(d) { return yScale(d.Price); });
-
-	var lowline = d3.line()
-		.xScale(function(d) { return xScale(d.Date); })
-		.yScale(function(d) { return yScale(d.Low); });
-
-	var highline = d3.line()
-		.xScale(function(d) { return xScale(d.Date); })
-		.yScale(function(d) { return yScale(d.High); });
 
 	//import the data
 	d3.csv("BTC USD Historical Data.csv", function(error, data){
@@ -55,27 +42,37 @@ function load() {
 			d.Low = +d.Low;
 		});	
 
-	
 		console.log(d.Date);
 
+		// define lines
+		var priceline = d3.line()
+			.x(function(d) { return x(d.Date); })
+			.y(function(d) { return y(d.Price); });
+
+		var lowline = d3.line()
+			.x(function(d) { return x(d.Date); })
+			.y(function(d) { return y(d.Low); });
+
+		var highline = d3.line()
+			.x(function(d) { return x(d.Date); })
+			.y(function(d) { return y(d.High); });
+
 		// specify the domains of xscale yscale
-		xScale.domain(d3.extent(data, function(d) { return d.Date; }) );
-		yScale.domain([ 
-			d3.min(data, function(d) { return d.Low; }),
-			d3.max(data, function(d) { return d.High; })
-		]);
+		x.domain(d3.extent(data, function(d) { return d.Date; }) );
+		y.domain([0, d3.max(data, function(d) {
+			return Math.max(d.High) })]);
 
 		// Add xAxis to svg       
     	svg.append("g")
 	    	.attr("class", "x axis")
 	        .attr("transform", "translate(0," + height + ")") 
-	        .call(xAxis)
+	        .call(d3.axisBottom(x));
 	        .style("font-size", "11px")
 		
 		// Add yAxis to svg 
 		svg.append("g")
             .attr("class", "y axis")
-            .call(yAxis)
+            .call(d3.axisLeft(y))
             .style("font-size", "11px")
            .append("text")
             .attr("class", "label")
