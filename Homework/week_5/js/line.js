@@ -42,9 +42,6 @@ function load() {
 			d.Low = +d.Low;
 		});	
 
-		var colorvar = data.columns.slice(1).map(function(id) {
-    		return { id: id } };
-
 		// define lines
 		var priceline = d3.line()
 			.x(function(d) { return x(d.Date); })
@@ -62,8 +59,7 @@ function load() {
 		x.domain(d3.extent(data, function(d) { return d.Date; }) );
 		y.domain([0, d3.max(data, function(d) {
 			return Math.max(d.High) })]);
-		z.domain(colorvar.map(function(c) { return c.id; }));
-
+	
 		// Add xAxis to svg       
     	svg.append("g")
 	    	.attr("class", "x axis")
@@ -87,21 +83,21 @@ function load() {
         svg.append("path")
         	.data([data])
         	.attr("class", "line")
-        	.style("stroke", function(d) { return z(d.id); })
+        	.style("stroke", "black")
         	.attr("d", priceline)
 
          // add lines
         svg.append("path")
         	.data([data])
         	.attr("class", "line")
-        	.style("stroke", function(d) { return z(d.id); })
+        	.style("stroke", "green")
         	.attr("d", highline)
 
          // add lines
         svg.append("path")
         	.data([data])
         	.attr("class", "line")
-        	.style("stroke", function(d) { return z(d.id); })
+        	.style("stroke", "red")
         	.attr("d", lowline)
 	});
 }
