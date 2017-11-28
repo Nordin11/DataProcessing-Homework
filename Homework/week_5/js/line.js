@@ -39,6 +39,8 @@ function load() {
 			d.Low = +d.Low;
 		});	
 
+		console.log(typeof(Price))
+
 		// define lines
 		var priceline = d3.line()
 			.x(function(d) { return x(d.Date); })
