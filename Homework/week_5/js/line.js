@@ -66,7 +66,7 @@ function load() {
         svg.append("path")
         	.data([data])
         	.attr("class", "line")
-        	.style("stroke", "black")
+        	.style("stroke", "blue")
         	.attr("d", priceline);
 
         // add lines
