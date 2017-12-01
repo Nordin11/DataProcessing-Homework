@@ -1,9 +1,11 @@
+/* make the whole page free of padding margin and border */
 * {
 	margin: 0;
 	padding: 0;
 	border: 0;
 }
 
+/* common style rules for whole content */
 body {
 	font-family: 'Comfortaa' cursive;
 	font-size: 30px;
@@ -11,6 +13,7 @@ body {
 	background-color: #f7fcf7;
 }
 
+/* define the text style details */
 h1 {
 	text-align:center;
 	font-size: 80%;
@@ -41,6 +44,7 @@ svg {
 	display: block;
 } 
 
+/* style rules for x and y axis */
 .axis path,
 .axis line {
 	fill: none;
@@ -48,10 +52,12 @@ svg {
 	shape-rendering: crispEdges;
 }
 
+/* axis label style rule */
 .label {
 	font-size: 11px;
 }
 
+/* data style rules */
 .line {
   fill: none;
   stroke-width: 2px;
