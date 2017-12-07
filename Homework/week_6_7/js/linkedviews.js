@@ -90,10 +90,10 @@ function load() {
 				"width": xScale.rangeBand(),
 				"height": function(d) { return height - yScale(d.Werklozen); }
 			})
-			.attr("class", "barcolor");
+			.attr("class", "barcolor")
 			.on("mouseover", tipMouseover)
             .on("mouseout", tipMouseout);
-            
+
 		// draw xAxis
 		svg.append("g")
 			.attr("class", "x axis")
