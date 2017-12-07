@@ -47,13 +47,19 @@ a {
 	font-weight: 200;
 }
 
+svg {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+} 
+
 .barcolor {
-	fill: #630429;
+	fill: "blue";
 }
 
 .axis path,
 .axis line {
 	fill: none;
-	stroke: #00ffc7;
+	stroke: #000;
 	shape-rendering: crispEdges;
 }
