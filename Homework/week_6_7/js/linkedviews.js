@@ -5,7 +5,7 @@ function load() {
 
 	// define margins 
 	var margin = { top: 20, right: 10, bottom: 100, left: 40 },
-		width = 700 - margin.right - margin.left,
+		width = 960 - margin.right - margin.left,
 		height = 500 - margin.top - margin.bottom;
 
 	// define svg
@@ -92,6 +92,7 @@ function load() {
 			.attr("y", function(d) { return yScale (d.Werklozen) + 20; })
 			.attr("class", "tempcolor")
 			.style("text-anchor", "middle");
+
 	});
 
 
