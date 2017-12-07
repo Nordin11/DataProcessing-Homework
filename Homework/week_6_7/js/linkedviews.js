@@ -64,7 +64,7 @@ function load() {
 		yScale.domain([0, d3.max(data, function(d) { return d.Werklozen; }) ] );
 
 		// draw the bars
-		svg.select("#graph1")
+		svg.select("rect")
 			.data(data)
 			.enter()
 			.append("rect")
