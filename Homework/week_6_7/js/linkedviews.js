@@ -44,7 +44,7 @@ function load() {
   	})
 
   	svg.call(tip);
-  	
+
 	/* d3.queue()
 	.defer(d3.csv, "Werkloosheid.csv")
 	.defer(d3.csv, "Economische activiteit.csv")
@@ -64,7 +64,7 @@ function load() {
 		yScale.domain([0, d3.max(data, function(d) { return d.Werklozen; }) ] );
 
 		// draw the bars
-		svg.selectAll("rect")
+		svg.select("#graph1")
 			.data(data)
 			.enter()
 			.append("rect")
