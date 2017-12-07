@@ -81,6 +81,17 @@ function load() {
 			.call(yAxis)
 			.style("font-size", "13px")
 			.style("fill", "#fff")
+
+		// lable the bars
+		svg.selectAll("text")
+			.data(data)
+			.enter()
+			.append("text")
+			.text(function (d) { return d.Werklozen; })
+			.attr("x", function(d) { return xScale(d.Perioden) + xScale.rangeBand() / 2; })
+			.attr("y", function(d) { return yScale (d.Werklozen) + 20; })
+			.attr("class", "tempcolor")
+			.style("text-anchor", "middle");
 	});
 
 
