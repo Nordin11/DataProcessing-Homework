@@ -44,7 +44,6 @@ function load() {
   	})
 
   	svg.call(tip);
-
 	/* d3.queue()
 	.defer(d3.csv, "Werkloosheid.csv")
 	.defer(d3.csv, "Economische activiteit.csv")
