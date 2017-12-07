@@ -61,8 +61,7 @@ function load() {
 
         // tooltip Mouse Over info
         var tipMouseover = function(d) {
-            var html  = d.Country + "<br/>" +
-            			"<span style='color:'red';'>" + d.Perioden + "</span><br/>" +
+            var html  = "<span style='color:'red';'>" + d.Perioden + "</span><br/>" +
                         "<b>" + d.Werklozen + "</b>"; 
             tooltip.html(html)
                 .style("left", (d3.event.pageX + 10) + "px")
