@@ -36,6 +36,15 @@ function load() {
 		.scale(yScale)
 		.orient("left");
 
+	var tip = d3.tip()
+  		.attr('class', 'd3-tip')
+  		.offset([-10, 0])
+  		.html(function(d) {
+    		return "<strong>Werkloosheid:</strong> <span style='color:red'>" + d.Werkloosheid + "</span>";
+  	})
+
+  	svg.call(tip);
+  	
 	/* d3.queue()
 	.defer(d3.csv, "Werkloosheid.csv")
 	.defer(d3.csv, "Economische activiteit.csv")
