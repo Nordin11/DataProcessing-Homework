@@ -36,14 +36,6 @@ function load() {
 		.scale(yScale)
 		.orient("left");
 
-	var tip = d3.tip()
-  		.attr('class', 'd3-tip')
-  		.offset([-10, 0])
-  		.html(function(d) {
-    		return "<strong>Werkloosheid:</strong> <span style='color:red'>" + d.Werkloosheid + "</span>";
-  	})
-
-  	svg.call(tip);
 	/* d3.queue()
 	.defer(d3.csv, "Werkloosheid.csv")
 	.defer(d3.csv, "Economische activiteit.csv")
@@ -62,7 +54,32 @@ function load() {
 		xScale.domain(data.map(function(d) { return d.Perioden; }) );
 		yScale.domain([0, d3.max(data, function(d) { return d.Werklozen; }) ] );
 
-		// draw the bars
+		// Add tooltip
+        var tooltip = d3.select("#container").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        // tooltip Mouse Over info
+        var tipMouseover = function(d) {
+            var html  = d.Country + "<br/>" +
+            			"<span style='color:'red';'>" + d.Perioden + "</span><br/>" +
+                        "<b>" + d.Werklozen + "</b>"; 
+            tooltip.html(html)
+                .style("left", (d3.event.pageX + 10) + "px")
+                .style("top", (d3.event.pageY - 30) + "px")
+               .transition()
+                .duration(400) 
+                .style("opacity", 1); 
+        };
+
+        // tooltip mouseout event handler
+        var tipMouseout = function(d) {
+            tooltip.transition()
+                .duration(300)
+                .style("opacity", 0); 
+        };
+
+        // draw the bars
 		svg.selectAll("rect")
 			.data(data)
 			.enter()
@@ -74,7 +91,9 @@ function load() {
 				"height": function(d) { return height - yScale(d.Werklozen); }
 			})
 			.attr("class", "barcolor");
-
+			.on("mouseover", tipMouseover)
+            .on("mouseout", tipMouseout);
+            
 		// draw xAxis
 		svg.append("g")
 			.attr("class", "x axis")
@@ -102,7 +121,6 @@ function load() {
 			.style("text-anchor", "middle")
 			.style("color", "#000");
 
+
 	});
-
-
 };
