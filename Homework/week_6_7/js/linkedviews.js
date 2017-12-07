@@ -91,8 +91,8 @@ function load() {
 			.attr("x", function(d) { return xScale(d.Perioden) + xScale.rangeBand() / 2; })
 			.attr("y", function(d) { return yScale (d.Werklozen) + 20; })
 			.attr("class", "lable")
-			.style("text-anchor", "middle");
-			.style("color", "#000")
+			.style("text-anchor", "middle")
+			.style("color", "#000");
 
 	});
 
