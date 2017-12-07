@@ -5,7 +5,7 @@ function load() {
 
 	// define margins 
 	var margin = { top: 20, right: 10, bottom: 100, left: 40 },
-		width = 960 - margin.right - margin.left,
+		width = 700 - margin.right - margin.left,
 		height = 500 - margin.top - margin.bottom;
 
 	// define svg
@@ -73,14 +73,14 @@ function load() {
 			.attr("transform", "translate(0," + height + ")")
 			.call(xAxis)
 			.style("font-size", "13px")
-			.style("fill", "#fff");
+			.style("fill", "#000");
 
 		// draw yAxis
 		svg.append("g")
 			.attr("class", "y axis")
 			.call(yAxis)
 			.style("font-size", "13px")
-			.style("fill", "#fff")
+			.style("fill", "#000")
 
 		// lable the bars
 		svg.selectAll("text")
@@ -90,8 +90,9 @@ function load() {
 			.text(function (d) { return d.Werklozen; })
 			.attr("x", function(d) { return xScale(d.Perioden) + xScale.rangeBand() / 2; })
 			.attr("y", function(d) { return yScale (d.Werklozen) + 20; })
-			.attr("class", "tempcolor")
+			.attr("class", "lable")
 			.style("text-anchor", "middle");
+			.style("color", "#000")
 
 	});
 

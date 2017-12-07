@@ -57,6 +57,11 @@ svg {
 	fill: #1b5489;
 }
 
+
+.lable {
+	color: #000;
+}
+
 .axis path,
 .axis line {
 	fill: none;
