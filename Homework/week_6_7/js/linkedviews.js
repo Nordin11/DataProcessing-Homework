@@ -36,12 +36,12 @@ function load() {
 		.scale(yScale)
 		.orient("left");
 
-	d3.queue()
+	/* d3.queue()
 	.defer(d3.csv, "Werkloosheid.csv")
 	.defer(d3.csv, "Economische activiteit.csv")
-	.await(firstready)
+	.await(firstready) */
 
-	function firstready(error, data) {
+	d3.csv("Werkloosheid.csv", function (error, data) {
 
 		// check for errors
 		if(error) console.log("Error: data not loaded")
@@ -81,8 +81,7 @@ function load() {
 			.call(yAxis)
 			.style("font-size", "13px")
 			.style("fill", "#fff")
-	};
-
+	});
 
 
 };
