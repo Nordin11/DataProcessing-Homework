@@ -47,11 +47,11 @@ function load(){
 	    .defer(d3.tsv, "world_population.tsv")
 	    .await(ready);
 
-	function ready(error, data, score) {
+	function ready(error, data, population) {
 	  
-	  var scoreById = {};
+	  var populationById = {};
 
-	  score.forEach(function(d) { scoreById[d.Rank] = +d.score; });
+	  population.forEach(function(d) { populationById[d.id] = +d.population; });
 
 	  // Set tooltips
 	  var tip = d3.tip()
@@ -70,7 +70,7 @@ function load(){
 	      .data(data.features)
 	    .enter().append("path")
 	      .attr("d", path)
-	      .style("fill", function(d) { return color(scoreById[d.Rank]); })
+	      .style("fill", function(d) { return color(populationById[d.id]); })
 	      .style('stroke', 'white')
 	      .style('stroke-width', 1.5)
 	      .style("opacity",0.8)
