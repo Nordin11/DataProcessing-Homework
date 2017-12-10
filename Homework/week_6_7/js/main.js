@@ -64,6 +64,7 @@ function load(){
 	  	populationById[d.id] = +d.population; 
 	  });
 
+	  console.log(populationById)
 
 	  // convert data in proper format
 	  happy.forEach(function(d) { 
