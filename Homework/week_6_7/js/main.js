@@ -52,22 +52,29 @@ function load(){
 	    .defer(d3.csv, "world_happiness.csv")
 	    .await(ready);
 
-	function ready(error, data, happy) {
+	function ready(error, data, population) {
 
       // check for errors
       if(error) console.log("Error: data not loaded")
 
-	  var happinessById = {};
-	  // convert data in proper format
-	  happy.forEach(function(d) { 
-	  	d.GPD = +d.GDP;
-	  	d.Score = +d.Score;
-	  	happinessById[d.Rank] = +d.Score; 
+      // convert data in properformat
+	  var populationById = {};
+
+	  population.forEach(function(d) { 
+	  	populationById[d.id] = +d.population; 
 	  });
 
+	  var happinessById = {};
+	  // convert data in proper format
+	  //happy.forEach(function(d) { 
+	  //	d.GPD = +d.GDP;
+	  //	d.Score = +d.Score;
+	  //	happynessById[d.Rank] = +d.Score; 
+	  //});
+
 	  // specify the domains of xscale yscale
-      xScale.domain([0, d3.max(happy, function(d) { return d.GDP; }) + 0.2 ] );
-      yScale.domain([0, d3.max(happy, function(d) { return d.Score; }) + 1 ] );
+      //xScale.domain([0, d3.max(happy, function(d) { return d.GDP; }) + 0.2 ] );
+      //yScale.domain([0, d3.max(happy, function(d) { return d.Score; }) + 1 ] );
 
 	  // Set tooltips
 	  var tip = d3.tip()
@@ -75,7 +82,7 @@ function load(){
             .offset([-10, 0])
             .html(function(d) {
               return "<strong>Country: </strong><span class='tip-content'>" + d.properties.name + 
-              "<br></span>" + "<strong>Population:</strong><span class='tip-content'>" +  +"</span>";
+              "<br></span>" + "<strong>Population:</strong><span class='tip-content'>" + parseInt(d.population) +"</span>";
             })
    	  svg.call(tip);
 
@@ -86,7 +93,7 @@ function load(){
 	      .data(data.features)
 	    .enter().append("path")
 	      .attr("d", path)
-	      .style("fill", function(d) { return color(happinessById[d.Rank]); })
+	      .style("fill", function(d) { return color(populationById[d.id]); })
 	      .style('stroke', 'white')
 	      .style('stroke-width', 1.5)
 	      .style("opacity",0.8)
@@ -103,7 +110,7 @@ function load(){
 	        })
 	        .on('mouseout', function(d){
 	          d3.select(this)
-	          	.style("fill", function(d) { return color(happinessById[d.Rank]); })
+	          	.style("fill", function(d) { return color(populationById[d.id]); })
 	            .style("opacity", 0.8)
 	            .style("stroke","white")
 	            .style("stroke-width",0.3);
@@ -117,43 +124,7 @@ function load(){
 	      .attr("class", "names")
 	      .attr("d", path);
 
-	   // Add xAxis to svg       
-	      svg.append("g")
-	        .attr("class", "x axis")
-	          .attr("transform", "translate(0," + height + ")") 
-	          .call(xAxis)
-	          .style("font-size", "11px")
-	         // add x axis label
-	         .append("text")
-	          .attr("class", "label")
-	          .attr("x", width) 
-	          .attr("y", -6)    
-	          .style("text-anchor", "end") 
-	          .text("GDP per capita");
-	    
-	    // Add yAxis to svg 
-	    svg.append("g")
-	            .attr("class", "y axis")
-	            .call(yAxis)
-	            .style("font-size", "11px")
-	           .append("text")
-	            .attr("class", "label")
-	            .attr("transform", "rotate(-90)")
-	            .attr("y", 15) 
-	            .style("text-anchor", "end")
-	            .text("Happiness Score");
 
-	    // Add data points
-        svg.selectAll(".dot")
-            .data(happy)
-           .enter().append("circle")
-            .attr("class", "data")
-            .attr("r", 5) 
-            .attr("cx", function(d) { return xScale( d.GDP ); })   
-            .attr("cy", function(d) { return yScale( d.Score ); }) 
-            .style("fill", function(d) { return colordots( d.happinessById[d.Rank] ); })
-            //.on("mouseover", tipMouseover)
-            //.on("mouseout", tipMouseout);
 	}
 };
 	 
