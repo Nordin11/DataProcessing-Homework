@@ -16,7 +16,7 @@ function load(){
 	            .attr("width", width)
 	            .attr("height", height)
 	            .append('g')
-	            .attr('class', 'container');
+	            .attr('class', 'map');
 
 	var projection = d3.geo.mercator()
 	                   .scale(200)
