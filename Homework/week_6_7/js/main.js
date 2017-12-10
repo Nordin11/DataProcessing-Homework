@@ -1,6 +1,6 @@
 function load(){
 
-	var margin = {top: 50, right: 20, bottom: 20, left: 20},
+	var margin = {top: 50, right: 15, bottom: 20, left: 20},
 	            width = 1300 - margin.left - margin.right,
 	            height = 750 - margin.top - margin.bottom;
 
@@ -18,7 +18,7 @@ function load(){
 	            .attr('class', 'map');
 
 	var projection = d3.geo.mercator()
-	                   .scale(200)
+	                   .scale(150)
 	                  .translate( [width / 2, height / 1.5]);
 
 	var path = d3.geo.path().projection(projection);
