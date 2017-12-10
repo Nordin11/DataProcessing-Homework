@@ -1,7 +1,7 @@
 function load(){
 
 
-	var margin = {top: 20, right: 20, bottom: 30, left: 30},
+	var margin = {top: 50, right: 20, bottom: 50, left: 20},
 	            width = 1200 - margin.left - margin.right,
 	            height = 800 - margin.top - margin.bottom;
 
@@ -11,7 +11,7 @@ function load(){
 
 	var path = d3.geo.path();
 
-	var svg = d3.select("body").append("div").attr("class", "container-fluid")
+	var svg = d3.select("body")
 	            .append("svg")
 	            .attr("width", width)
 	            .attr("height", height)
