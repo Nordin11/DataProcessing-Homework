@@ -2,7 +2,7 @@ function load(){
 
 
 	var margin = {top: 50, right: 20, bottom: 50, left: 20},
-	            width = 1200 - margin.left - margin.right,
+	            width = 1300 - margin.left - margin.right,
 	            height = 800 - margin.top - margin.bottom;
 
 	var color = d3.scale.threshold()
