@@ -49,9 +49,9 @@ function load(){
 
 	function ready(error, data, score) {
 	  
-	  var scoreById = {};
+	  //var scoreById = {};
 
-	  score.forEach(function(d) { scoreById[d.Rank] = +d.score; });
+	  //score.forEach(function(d) { scoreById[d.Rank] = +d.score; });
 
 	  // Set tooltips
 	  var tip = d3.tip()
