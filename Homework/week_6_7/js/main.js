@@ -1,9 +1,9 @@
 function load(){
 
 
-	var margin = {top: 50, right: 20, bottom: 50, left: 20},
+	var margin = {top: 100, right: 20, bottom: 50, left: 20},
 	            width = 1300 - margin.left - margin.right,
-	            height = 800 - margin.top - margin.bottom;
+	            height = 750 - margin.top - margin.bottom;
 
 	var color = d3.scale.threshold()
 	    .domain([10000,100000,500000,1000000,5000000,10000000,50000000,100000000,500000000,1500000000])
