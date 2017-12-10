@@ -1,0 +1,25 @@
+body {
+	font-family: 'Comfortaa', cursive; 
+	background-color: #ededed;
+}
+
+.navbar-brand {
+	font-weight: bold;
+	border: 1px solid;
+	padding: 5px;
+	border-radius: 4px;
+	background-color: #5a5c60;
+
+}
+
+#main-container {
+	max-width: 1250px;
+	min-height: 90%;
+	height:90%;
+	margin: 0 auto;
+	background-color:#fff;
+	padding-top:50px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
