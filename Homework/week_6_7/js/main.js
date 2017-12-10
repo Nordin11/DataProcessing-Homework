@@ -44,13 +44,14 @@ function load(){
 
 	queue()
 	    .defer(d3.json, "world_countries.json")
-	    .defer(d3.tsv, "world_population.tsv")
+	    .defer(d3.csv, "world_happiness.csv")
 	    .await(ready);
 
-	function ready(error, data, population) {
-	  var populationById = {};
+	function ready(error, data, score) {
+	  
+	  var scoreById = {};
 
-	  population.forEach(function(d) { populationById[d.id] = +d.population; });
+	  score.forEach(function(d) { scoreById[d.Rank] = +d.score; });
 
 	  // Set tooltips
 	  var tip = d3.tip()
@@ -58,7 +59,7 @@ function load(){
             .offset([-10, 0])
             .html(function(d) {
               return "<strong>Country: </strong><span class='tip-content'>" + d.properties.name + 
-              "<br></span>" + "<strong>Population:</strong><span class='tip-content'>" + parseInt(d.population) +"</span>";
+              "<br></span>";
             })
    	  svg.call(tip);
 
@@ -69,7 +70,7 @@ function load(){
 	      .data(data.features)
 	    .enter().append("path")
 	      .attr("d", path)
-	      .style("fill", function(d) { return color(populationById[d.id]); })
+	      .style("fill", function(d) { return color(scoreById[d.Rank]); })
 	      .style('stroke', 'white')
 	      .style('stroke-width', 1.5)
 	      .style("opacity",0.8)
@@ -86,7 +87,6 @@ function load(){
 	        })
 	        .on('mouseout', function(d){
 	          d3.select(this)
-	          	.style("fill", function(d) { return color(populationById[d.id]); })
 	            .style("opacity", 0.8)
 	            .style("stroke","white")
 	            .style("stroke-width",0.3);
