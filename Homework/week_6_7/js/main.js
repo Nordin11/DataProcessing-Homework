@@ -49,9 +49,9 @@ function load(){
 
 	function ready(error, data, score) {
 	  
-	  var scoreById = {};
+	  //ar scoreById = {};
 
-	  score.forEach(function(d) { scoreById[d.Rank] = +d.score; });
+	  //score.forEach(function(d) { scoreById[d.Rank] = +d.score; });
 
 	  // Set tooltips
 	  var tip = d3.tip()
@@ -70,7 +70,7 @@ function load(){
 	      .data(data.features)
 	    .enter().append("path")
 	      .attr("d", path)
-	      .style("fill", function(d) { return color(scoreById[d.Rank]); })
+	      .style("fill", "blue"//function(d) { return color(scoreById[d.Rank]); })
 	      .style('stroke', 'white')
 	      .style('stroke-width', 1.5)
 	      .style("opacity",0.8)
