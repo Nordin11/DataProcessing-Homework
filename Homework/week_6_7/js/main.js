@@ -82,14 +82,14 @@ function load(){
 	          	.attr("fill", "orange")
 	            .style("opacity", 1)
 	            .style("stroke","white")
-	            .style("stroke-width",3);
+	            .style("stroke-width",3)
 	            tip.show(d);
 	        })
 	        .on('mouseout', function(d){
 	          d3.select(this)
 	            .style("opacity", 0.8)
 	            .style("stroke","white")
-	            .style("stroke-width",0.3);
+	            .style("stroke-width",0.3)
 	            tip.hide(d);
 
 	        });
