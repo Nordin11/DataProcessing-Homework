@@ -11,7 +11,7 @@ function load(){
 
 	var path = d3.geo.path();
 
-	var svg = d3.select("body")
+	var svg = d3.select("body").append("div").attr("class", "container-fluid")
 	            .append("svg")
 	            .attr("width", width)
 	            .attr("height", height)
