@@ -64,12 +64,10 @@ function load(){
 	  	populationById[d.id] = +d.population; 
 	  });
 
-	  console.log(populationById)
-
 	  // convert data in proper format
 	  happy.forEach(function(d) { 
 	  	d.GPD = +d.GDP;
-	  	d.Score = +d.Score
+	  	d.Score = +d.Score;
 	  });
 
 	  // specify the domains of xscale yscale
