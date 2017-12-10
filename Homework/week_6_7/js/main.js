@@ -28,7 +28,8 @@ function load(){
             .attr('class', 'd3-tip')
             .offset([-10, 0])
             .html(function(d) {
-              return "<strong>Country: </strong><span class='details'>" + d.properties.name + "<br></span>" + "<strong>Population: </strong><span class='details'>" + d.population +"</span>";
+              return "<strong>Country: </strong><span class='tip-content'>" + d.properties.name + 
+              "<br></span>" + "<strong>Population:</strong><span class='tip-content'>" + d.properties.population +"</span>";
             })
 
 	svg.call(tip);
