@@ -45,7 +45,6 @@ function load(){
 	queue()
 	    .defer(d3.json, "world_countries.json")
 	    .defer(d3.tsv, "world_population.tsv")
-	    .defer(d3.csv, "world_happiness.csv")
 	    .await(ready);
 
 	function ready(error, data, population) {
