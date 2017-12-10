@@ -27,11 +27,18 @@ body {
     font-weight: bold;
     padding: 6px;
     background: rgba(0, 0, 0, 0.6);
-    color: #FFA500;
+    color: #ededed;
     border-radius: 1px;
     pointer-events: none;
 }
 
 .tip-content {
 	color: #f9f9f9;
+}
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
 }

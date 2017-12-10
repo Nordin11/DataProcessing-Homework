@@ -3,74 +3,74 @@
 /*****************************/
 function load() {
 
-	// define margins 
-	var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+  // define margins 
+  var margin = { top: 20, right: 20, bottom: 30, left: 40 },
                   width  = 880 - margin.left - margin.right,
                   height = 500 - margin.top - margin.bottom;
 
-	// define svg
-	var svg = d3.select("#container")
-		.append("svg")
-		// group attributes together
-		.attr ({
-			"width": width + margin.right + margin.left,
-			"height": height + margin.top + margin.bottom
-		})
-			.append("g")
-				.attr("transform", "translate(" + margin.left + ',' + margin.right + ')');
+  // define svg
+  var svg = d3.select("#container")
+    .append("svg")
+    // group attributes together
+    .attr ({
+      "width": width + margin.right + margin.left,
+      "height": height + margin.top + margin.bottom
+    })
+      .append("g")
+        .attr("transform", "translate(" + margin.left + ',' + margin.right + ')');
 
-		
-	// Define color scales
+    
+  // Define color scales
     var colorScale = d3.scale.category10();
 
-	// define the x y scales
-	var xScale = d3.scale.linear()
-		.range([0, width]);
-			
-	var yScale = d3.scale.linear()
-		// make sure the height goes upwards in stead of top to bottom
-		.range([height, 0]);
+  // define the x y scales
+  var xScale = d3.scale.linear()
+    .range([0, width]);
+      
+  var yScale = d3.scale.linear()
+    // make sure the height goes upwards in stead of top to bottom
+    .range([height, 0]);
 
-	// define x and y axis
-	var xAxis = d3.svg.axis()
-		.scale(xScale)
-		.orient("bottom");
+  // define x and y axis
+  var xAxis = d3.svg.axis()
+    .scale(xScale)
+    .orient("bottom");
 
-	var yAxis = d3.svg.axis()
-		.scale(yScale)
-		.orient("left");
+  var yAxis = d3.svg.axis()
+    .scale(yScale)
+    .orient("left");
 
-	//import the data
-	d3.csv("World_Happiness_GDP_2017.csv", function(error, data) {
-	
-		// check for errors
-		if(error) console.log("Error: data not loaded")
+  //import the data
+  d3.csv("World_Happiness_GDP_2017.csv", function(error, data) {
+  
+    // check for errors
+    if(error) console.log("Error: data not loaded")
 
-		// convert data in proper format
-		data.forEach(function(d) {
-			d.Score = +d.Score;
-			d.GDP = +d.GDP; });
+    // convert data in proper format
+    data.forEach(function(d) {
+      d.Score = +d.Score;
+      d.GDP = +d.GDP; });
 
-		// specify the domains of xscale yscale
-		xScale.domain([0, d3.max(data, function(d) { return d.GDP; }) + 0.2 ] );
-		yScale.domain([0, d3.max(data, function(d) { return d.Score; }) + 1 ] );
+    // specify the domains of xscale yscale
+    xScale.domain([0, d3.max(data, function(d) { return d.GDP; }) + 0.2 ] );
+    yScale.domain([0, d3.max(data, function(d) { return d.Score; }) + 1 ] );
 
-		// Add xAxis to svg       
-    	svg.append("g")
-	    	.attr("class", "x axis")
-	        .attr("transform", "translate(0," + height + ")") 
-	        .call(xAxis)
-	        .style("font-size", "11px")
-	       // add x axis label
-	       .append("text")
-	        .attr("class", "label")
-	        .attr("x", width) 
-	        .attr("y", -6)    
-	        .style("text-anchor", "end") 
-	        .text("GDP per capita");
-		
-		// Add yAxis to svg 
-		svg.append("g")
+    // Add xAxis to svg       
+      svg.append("g")
+        .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")") 
+          .call(xAxis)
+          .style("font-size", "11px")
+         // add x axis label
+         .append("text")
+          .attr("class", "label")
+          .attr("x", width) 
+          .attr("y", -6)    
+          .style("text-anchor", "end") 
+          .text("GDP per capita");
+    
+    // Add yAxis to svg 
+    svg.append("g")
             .attr("class", "y axis")
             .call(yAxis)
             .style("font-size", "11px")
@@ -90,7 +90,7 @@ function load() {
         var tipMouseover = function(d) {
             var color = colorScale(d.Country);
             var html  = d.Country + "<br/>" +
-            			"<span style='color:" + colorScale + ";'>" + d.Continent + "</span><br/>" +
+                  "<span style='color:" + colorScale + ";'>" + d.Continent + "</span><br/>" +
                         "<b>" + d.Score + "</b> Happiness Score, <b/>" + d.GDP + "</b> GDP"; 
             tooltip.html(html)
                 .style("left", (d3.event.pageX + 10) + "px")
@@ -107,7 +107,7 @@ function load() {
                 .style("opacity", 0); 
         };
 
-		// Add data points
+    // Add data points
         svg.selectAll(".dot")
             .data(data)
            .enter().append("circle")
@@ -118,26 +118,26 @@ function load() {
             .style("fill", function(d) { return colorScale( d.Continent ); })
             .on("mouseover", tipMouseover)
             .on("mouseout", tipMouseout);
-  		
+      
         // Add legend
-  		var legend = svg.selectAll(".legend")
-      		.data(colorScale.domain())
-    		.enter().append("g")
-      		.attr("class", "legend")
-      		.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+      var legend = svg.selectAll(".legend")
+          .data(colorScale.domain())
+        .enter().append("g")
+          .attr("class", "legend")
+          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
-  		legend.append("rect")
-      		.attr("x", width - 15)
-      		.attr("width", 15)
-      		.attr("height", 15)
-      		.style("fill", colorScale);
+      legend.append("rect")
+          .attr("x", width - 15)
+          .attr("width", 15)
+          .attr("height", 15)
+          .style("fill", colorScale);
 
-  		legend.append("text")
-      		.attr("x", width - 26)
-      		.attr("y", 9)
-      		.attr("dy", ".35em")
-      		.style("text-anchor", "end")
-      		.text(function(d) { return d; });
-	});
+      legend.append("text")
+          .attr("x", width - 26)
+          .attr("y", 9)
+          .attr("dy", ".35em")
+          .style("text-anchor", "end")
+          .text(function(d) { return d; });
+  });
 
 };

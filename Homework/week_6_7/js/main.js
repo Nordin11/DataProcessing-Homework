@@ -1,12 +1,13 @@
 function load(){
 
+	///// define variables for the map /////
 	var margin = {top: 50, right: 15, bottom: 20, left: 20},
 	            width = 1300 - margin.left - margin.right,
 	            height = 750 - margin.top - margin.bottom;
 
 	var color = d3.scale.threshold()
 	    .domain([10000,100000,500000,1000000,5000000,10000000,50000000,100000000,500000000,1500000000])
-	    .range(["rgb(214, 206, 201)", "rgb(214, 193, 179", "rgb(214, 179, 156)", "rgb(209, 166, 138)", "rgb(193, 152, 125)", "rgb(206, 132, 72)","rgb(214, 125, 53)","rgb(158, 102, 18)","rgb(114, 72, 9)","rgb(145, 97, 24)"]);
+	    .range(["rgb(214, 206, 201)", "rgb(214, 193, 179)", "rgb(214, 179, 156)", "rgb(209, 166, 138)", "rgb(193, 152, 125)", "rgb(206, 132, 72)","rgb(214, 125, 53)","rgb(158, 102, 18)","rgb(114, 72, 9)","rgb(145, 97, 24)"]);
 
 	var path = d3.geo.path();
 
@@ -14,8 +15,7 @@ function load(){
 	            .append("svg")
 	            .attr("width", width)
 	            .attr("height", height)
-	            .append('g')
-	            .attr('class', 'map');
+	            .append('g');
 
 	var projection = d3.geo.mercator()
 	                   .scale(150)
@@ -23,15 +23,57 @@ function load(){
 
 	var path = d3.geo.path().projection(projection);
 
+	///// DEFINE VARIABLES FOR SCATTER /////
+
+	// define the x y scales
+  	var xScale = d3.scale.linear()
+    	.range([0, width]);
+      
+  	var yScale = d3.scale.linear()
+    	// make sure the height goes upwards in stead of top to bottom
+    	.range([height, 0]);
+
+  	// define x and y axis
+  	var xAxis = d3.svg.axis()
+    	.scale(xScale)
+    	.orient("bottom");
+
+  	var yAxis = d3.svg.axis()
+    	.scale(yScale)
+    	.orient("left");
+
+    var colordots = d3.scale.threshold()
+	    .domain([10000,100000,500000])
+	    .range(["rgb(25, 132, 53)", "rgb(188, 125, 22)","rgb(147, 14, 4)"]);
+
 	queue()
 	    .defer(d3.json, "world_countries.json")
 	    .defer(d3.tsv, "world_population.tsv")
+	    .defer(d3.csv, "world_happiness.csv")
 	    .await(ready);
 
-	function ready(error, data, population) {
+	function ready(error, data, population, happy) {
+
+      // check for errors
+      if(error) console.log("Error: data not loaded")
+
+      // convert data in properformat
 	  var populationById = {};
 
-	  population.forEach(function(d) { populationById[d.id] = +d.population; });
+	  population.forEach(function(d) { 
+	  	populationById[d.id] = +d.population; 
+	  });
+
+
+	  // convert data in proper format
+	  happy.forEach(function(d) { 
+	  	d.GPD = +d.GDP;
+	  	d.Score = +d.Score
+	  });
+
+	  // specify the domains of xscale yscale
+      xScale.domain([0, d3.max(happy, function(d) { return d.GDP; }) + 0.2 ] );
+      yScale.domain([0, d3.max(happy, function(d) { return d.Score; }) + 1 ] );
 
 	  // Set tooltips
 	  var tip = d3.tip()
@@ -80,6 +122,44 @@ function load(){
 	       // .datum(topojson.mesh(data.features, function(a, b) { return a !== b; }))
 	      .attr("class", "names")
 	      .attr("d", path);
+
+	   // Add xAxis to svg       
+	      svg.append("g")
+	        .attr("class", "x axis")
+	          .attr("transform", "translate(0," + height + ")") 
+	          .call(xAxis)
+	          .style("font-size", "11px")
+	         // add x axis label
+	         .append("text")
+	          .attr("class", "label")
+	          .attr("x", width) 
+	          .attr("y", -6)    
+	          .style("text-anchor", "end") 
+	          .text("GDP per capita");
+	    
+	    // Add yAxis to svg 
+	    svg.append("g")
+	            .attr("class", "y axis")
+	            .call(yAxis)
+	            .style("font-size", "11px")
+	           .append("text")
+	            .attr("class", "label")
+	            .attr("transform", "rotate(-90)")
+	            .attr("y", 15) 
+	            .style("text-anchor", "end")
+	            .text("Happiness Score");
+
+	    // Add data points
+        svg.selectAll(".dot")
+            .data(data)
+           .enter().append("circle")
+            .attr("class", "data")
+            .attr("r", 5) 
+            .attr("cx", function(d) { return xScale( d.GDP ); })   
+            .attr("cy", function(d) { return yScale( d.Score ); }) 
+            .style("fill", function(d) { return colordots( d.Score ); })
+            //.on("mouseover", tipMouseover)
+            //.on("mouseout", tipMouseout);
 	}
 };
 	 
