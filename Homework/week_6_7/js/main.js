@@ -23,22 +23,17 @@ function load(){
 
 	var path = d3.geo.path().projection(projection);
 
+	svg.call(tip);
 
 	queue()
 	    .defer(d3.json, "world_countries.json")
 	    .defer(d3.tsv, "world_population.tsv")
 	    .await(ready);
 
-	function ready(error, data, population,name) {
+	function ready(error, data, population) {
 	  var populationById = {};
 
 	  population.forEach(function(d) { populationById[d.id] = +d.population; });
-
-	    // call tooltip
-        var tooltip = d3.select("body").append("div")
-          .attr("class", "tooltip")
-          .style("opacity", 0);
-
 
 	  // draw world map
 	  svg.append("g")
@@ -56,18 +51,11 @@ function load(){
 	        .style('stroke-width', 0.3)
 	        .on('mouseover',function(d){
 	          d3.select(this)
-	          	.attr("fill", "#ffa216")
+	          	.attr("fill", "orange")
 	            .style("opacity", 1)
 	            .style("stroke","white")
 	            .style("stroke-width",3);
-	            tooltip.transition()
-                    .duration(200)
-                    .style("opacity", .9);
-                tooltip.html(d.name +
-                             + "population: "
-                             + d.population)
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
+	            tip.show(d);
 	        })
 	        .on('mouseout', function(d){
 	          d3.select(this)
@@ -75,9 +63,8 @@ function load(){
 	            .style("opacity", 0.8)
 	            .style("stroke","white")
 	            .style("stroke-width",0.3);
-	            tooltip.transition()
-                    .duration(500)
-                    .style("opacity", 0);
+	            tip.hide(d);
+
 	        });
 
 	  svg.append("path")
