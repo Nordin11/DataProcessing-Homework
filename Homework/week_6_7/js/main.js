@@ -7,7 +7,7 @@ function load(){
 
 	var color = d3.scale.threshold()
 	    .domain([10000,100000,500000,1000000,5000000,10000000,50000000,100000000,500000000,1500000000])
-	    .range(["rgb(214, 206, 201)", "rgb(214, 193, 179)", "rgb(214, 179, 156)", "rgb(209, 166, 138)", "rgb(193, 152, 125)", "rgb(206, 132, 72)","rgb(214, 125, 53)","rgb(158, 102, 18)","rgb(114, 72, 9)","rgb(145, 97, 24)"]);
+	    .range(["rgb(214, 206, 201)", "rgb(214, 193, 179", "rgb(214, 179, 156)", "rgb(209, 166, 138)", "rgb(193, 152, 125)", "rgb(206, 132, 72)","rgb(214, 125, 53)","rgb(158, 102, 18)","rgb(114, 72, 9)","rgb(145, 97, 24)"]);
 
 	var path = d3.geo.path();
 
@@ -42,10 +42,6 @@ function load(){
     	.scale(yScale)
     	.orient("left");
 
-    var colordots = d3.scale.threshold()
-	    .domain([10000,100000,500000])
-	    .range(["rgb(25, 132, 53)", "rgb(188, 125, 22)","rgb(147, 14, 4)"]);
-
 	queue()
 	    .defer(d3.json, "world_countries.json")
 	    .defer(d3.tsv, "world_population.tsv")
@@ -53,28 +49,9 @@ function load(){
 	    .await(ready);
 
 	function ready(error, data, population) {
-
-      // check for errors
-      if(error) console.log("Error: data not loaded")
-
-      // convert data in properformat
 	  var populationById = {};
 
-	  population.forEach(function(d) { 
-	  	populationById[d.id] = +d.population; 
-	  });
-
-	  var happinessById = {};
-	  // convert data in proper format
-	  //happy.forEach(function(d) { 
-	  //	d.GPD = +d.GDP;
-	  //	d.Score = +d.Score;
-	  //	happynessById[d.Rank] = +d.Score; 
-	  //});
-
-	  // specify the domains of xscale yscale
-      //xScale.domain([0, d3.max(happy, function(d) { return d.GDP; }) + 0.2 ] );
-      //yScale.domain([0, d3.max(happy, function(d) { return d.Score; }) + 1 ] );
+	  population.forEach(function(d) { populationById[d.id] = +d.population; });
 
 	  // Set tooltips
 	  var tip = d3.tip()
@@ -123,8 +100,6 @@ function load(){
 	       // .datum(topojson.mesh(data.features, function(a, b) { return a !== b; }))
 	      .attr("class", "names")
 	      .attr("d", path);
-
-
 	}
 };
 	 
