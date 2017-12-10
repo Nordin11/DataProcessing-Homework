@@ -23,17 +23,6 @@ function load(){
 
 	var path = d3.geo.path().projection(projection);
 
-	// Set tooltips
-	var tip = d3.tip()
-            .attr('class', 'd3-tip')
-            .offset([-10, 0])
-            .html(function(d) {
-              return "<strong>Country: </strong><span class='tip-content'>" + d.properties.name + 
-              "<br></span>" + "<strong>Population:</strong><span class='tip-content'>" + d.properties.population +"</span>";
-            })
-
-	svg.call(tip);
-
 	queue()
 	    .defer(d3.json, "world_countries.json")
 	    .defer(d3.tsv, "world_population.tsv")
@@ -43,6 +32,16 @@ function load(){
 	  var populationById = {};
 
 	  population.forEach(function(d) { populationById[d.id] = +d.population; });
+
+	  // Set tooltips
+	  var tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .offset([-10, 0])
+            .html(function(d) {
+              return "<strong>Country: </strong><span class='tip-content'>" + d.properties.name + 
+              "<br></span>" + "<strong>Population:</strong><span class='tip-content'>" + parseInt(d.population) +"</span>";
+            })
+   	  svg.call(tip);
 
 	  // draw world map
 	  svg.append("g")
