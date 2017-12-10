@@ -1,7 +1,7 @@
 function load(){
 
 
-	var margin = {top: 100, right: 20, bottom: 50, left: 20},
+	var margin = {top: 50, right: 20, bottom: 20, left: 20},
 	            width = 1300 - margin.left - margin.right,
 	            height = 750 - margin.top - margin.bottom;
 
