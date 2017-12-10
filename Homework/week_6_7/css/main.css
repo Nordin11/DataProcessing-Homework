@@ -14,8 +14,8 @@ body {
 
 #main-container {
 	max-width: 1250px;
-	min-height: 90%;
-	height:90%;
+	min-height: 10%;
+	max-height: 10%;
 	margin: 0 auto;
 	background-color:#fff;
 	padding-top:50px;
