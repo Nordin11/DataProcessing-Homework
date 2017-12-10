@@ -23,6 +23,14 @@ function load(){
 
 	var path = d3.geo.path().projection(projection);
 
+	// Set tooltips
+	var tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .offset([-10, 0])
+            .html(function(d) {
+              return "<strong>Country: </strong><span class='details'>" + d.properties.name + "<br></span>" + "<strong>Population: </strong><span class='details'>" + d.population +"</span>";
+            })
+
 	svg.call(tip);
 
 	queue()
