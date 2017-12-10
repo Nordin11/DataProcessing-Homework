@@ -52,22 +52,17 @@ function load(){
 	    .defer(d3.csv, "world_happiness.csv")
 	    .await(ready);
 
-	function ready(error, data, population, happy) {
+	function ready(error, data, happy) {
 
       // check for errors
       if(error) console.log("Error: data not loaded")
 
-      // convert data in properformat
-	  var populationById = {};
-
-	  population.forEach(function(d) { 
-	  	populationById[d.id] = +d.population; 
-	  });
-
+	  var happinessById = {};
 	  // convert data in proper format
 	  happy.forEach(function(d) { 
 	  	d.GPD = +d.GDP;
 	  	d.Score = +d.Score;
+	  	happinessById[d.Rank] = +d.Score; 
 	  });
 
 	  // specify the domains of xscale yscale
@@ -80,7 +75,7 @@ function load(){
             .offset([-10, 0])
             .html(function(d) {
               return "<strong>Country: </strong><span class='tip-content'>" + d.properties.name + 
-              "<br></span>" + "<strong>Population:</strong><span class='tip-content'>" + parseInt(d.population) +"</span>";
+              "<br></span>" + "<strong>Population:</strong><span class='tip-content'>" +  +"</span>";
             })
    	  svg.call(tip);
 
@@ -91,7 +86,7 @@ function load(){
 	      .data(data.features)
 	    .enter().append("path")
 	      .attr("d", path)
-	      .style("fill", function(d) { return color(populationById[d.id]); })
+	      .style("fill", function(d) { return color(happinessById[d.Rank]); })
 	      .style('stroke', 'white')
 	      .style('stroke-width', 1.5)
 	      .style("opacity",0.8)
@@ -108,7 +103,7 @@ function load(){
 	        })
 	        .on('mouseout', function(d){
 	          d3.select(this)
-	          	.style("fill", function(d) { return color(populationById[d.id]); })
+	          	.style("fill", function(d) { return color(happinessById[d.Rank]); })
 	            .style("opacity", 0.8)
 	            .style("stroke","white")
 	            .style("stroke-width",0.3);
@@ -150,13 +145,13 @@ function load(){
 
 	    // Add data points
         svg.selectAll(".dot")
-            .data(data)
+            .data(happy)
            .enter().append("circle")
             .attr("class", "data")
             .attr("r", 5) 
             .attr("cx", function(d) { return xScale( d.GDP ); })   
             .attr("cy", function(d) { return yScale( d.Score ); }) 
-            .style("fill", function(d) { return colordots( d.Score ); })
+            .style("fill", function(d) { return colordots( d.happinessById[d.Rank] ); })
             //.on("mouseover", tipMouseover)
             //.on("mouseout", tipMouseout);
 	}
