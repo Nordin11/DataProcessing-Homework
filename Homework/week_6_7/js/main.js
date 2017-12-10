@@ -44,14 +44,14 @@ function load(){
 
 	queue()
 	    .defer(d3.json, "world_countries.json")
-	    .defer(d3.csv, "world_happiness.csv")
+	    .defer(d3.tsv, "world_population.tsv")
 	    .await(ready);
 
 	function ready(error, data, score) {
 	  
-	  //var scoreById = {};
+	  var scoreById = {};
 
-	  //score.forEach(function(d) { scoreById[d.Rank] = +d.score; });
+	  score.forEach(function(d) { scoreById[d.Rank] = +d.score; });
 
 	  // Set tooltips
 	  var tip = d3.tip()
@@ -70,7 +70,7 @@ function load(){
 	      .data(data.features)
 	    .enter().append("path")
 	      .attr("d", path)
-	      .style("fill", "blue")//function(d) { return color(scoreById[d.Rank]); })
+	      .style("fill", function(d) { return color(scoreById[d.Rank]); })
 	      .style('stroke', 'white')
 	      .style('stroke-width', 1.5)
 	      .style("opacity",0.8)
@@ -82,22 +82,24 @@ function load(){
 	          	.attr("fill", "orange")
 	            .style("opacity", 1)
 	            .style("stroke","white")
-	            .style("stroke-width",3)
+	            .style("stroke-width",3);
 	            tip.show(d);
 	        })
 	        .on('mouseout', function(d){
 	          d3.select(this)
+	          	.style("fill", function(d) { return color(populationById[d.id]); })
 	            .style("opacity", 0.8)
 	            .style("stroke","white")
-	            .style("stroke-width",0.3)
+	            .style("stroke-width",0.3);
 	            tip.hide(d);
+
 	        });
 
 	  svg.append("path")
-	    .datum(topojson.mesh(data.features, function(a, b) { return a.id !== b.id; }))
-	     // .datum(topojson.mesh(data.features, function(a, b) { return a !== b; }))
-	    .attr("class", "names")
-	    .attr("d", path);
+	      .datum(topojson.mesh(data.features, function(a, b) { return a.id !== b.id; }))
+	       // .datum(topojson.mesh(data.features, function(a, b) { return a !== b; }))
+	      .attr("class", "names")
+	      .attr("d", path);
 	}
 };
 	 
