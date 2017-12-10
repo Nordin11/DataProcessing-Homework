@@ -29,7 +29,7 @@ function load(){
 	    .defer(d3.tsv, "world_population.tsv")
 	    .await(ready);
 
-	function ready(error, data, population) {
+	function ready(error, data, population,name) {
 	  var populationById = {};
 
 	  population.forEach(function(d) { populationById[d.id] = +d.population; });
@@ -63,9 +63,9 @@ function load(){
 	            tooltip.transition()
                     .duration(200)
                     .style("opacity", .9);
-                tooltip.html(d.name + "<br></br>"
+                tooltip.html(d.name +
                              + "population: "
-                             + parseInt(d.population))
+                             + d.population)
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
 	        })
