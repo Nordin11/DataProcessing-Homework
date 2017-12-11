@@ -14,8 +14,6 @@ body {
 
 #main-container {
 	max-width: 1250px;
-	min-height: 10%;
-	max-height: 10%;
 	margin: 0 auto;
 	background-color:#fff;
 	padding-top:50px;
@@ -42,3 +40,4 @@ body {
 	stroke: #000;
 	shape-rendering: crispEdges;
 }
+
