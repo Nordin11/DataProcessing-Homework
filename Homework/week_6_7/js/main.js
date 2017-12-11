@@ -74,7 +74,7 @@ function load(){
 	      .style('stroke', 'white')
 	      .style('stroke-width', 1.5)
 	      .style("opacity",0.8)
-	      // tooltips
+	      	// tooltips
 	        .style("stroke","white")
 	        .style('stroke-width', 0.3)
 	        .on('mouseover',function(d){
