@@ -156,8 +156,9 @@ function load(){
             .attr("x", (scatter_width / 2) + scatter_margin.left)
             .attr("y", 20 - (scatter_margin.top / 2))
             .attr("text-anchor", "middle")
-            .style("font-size", "11px")
-            .text("Click on a country in the map below");
+            .style("font-size", "12px")
+            .style("font-weight", "bold")
+            .text("Click on a country in the worldmap below");
 
 		// Set tooltips
 		var tip = d3.tip()
