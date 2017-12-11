@@ -150,6 +150,15 @@ function load(){
             .on("mouseover", tipMouseover)
             .on("mouseout", tipMouseout);
 
+        // title of the scatter
+        scatter_svg.append("text")
+            .attr("class", "scatterTitle")
+            .attr("x", (scatter_width / 2) + scatter_margin.left)
+            .attr("y", 20 - (scatter_margin.top / 2))
+            .attr("text-anchor", "middle")
+            .style("font-size", "12px")
+            .style("font-weight", "bold")
+            .text("Click on a country in the worldmap below");
 
 		// Set tooltips
 		var tip = d3.tip()
@@ -196,8 +205,17 @@ function load(){
 		        })
 		        .on("click", function(d) {
 
-                	d3.select(this).attr("fill", "red");
+                    var map_country = d.names;
 
+                    for (var i = 0; i < happy.length; i++) {
+                    	if (happy[i].Country.localeCompare(names) == 0) {
+        					scatter_svg.select(".happy-data")
+            				.data(happy)
+          					.transition()
+                            .duration(500)
+            				.attr("r", 10) 		
+                    	}
+                    };
         		});
 
 	    // Add path
