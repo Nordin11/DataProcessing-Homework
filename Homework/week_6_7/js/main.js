@@ -30,6 +30,9 @@ function load(){
 					scatter_width = 800 - scatter_margin.left - scatter_margin.right,
 					scatter_height = 600 - scatter_margin.top - scatter_margin.bottom;
 
+	// Define color scales
+    var colorScale = d3.scale.category10();
+
 	// define the x y scales
   	var xScale = d3.scale.linear()
     	.range([0, scatter_width]);
@@ -152,13 +155,15 @@ function load(){
 	        .text("Happiness Score");
 
 	    // Add tooltip
-        var tooltip = d3.select("#container").append("div")
+        var tooltip = d3.select("#main-container").append("div")
             .attr("class", "tooltip")
             .style("opacity", 0);
 
         // tooltip Mouse Over info
         var tipMouseover = function(d) {
-            var html  = d.Country + "<br/>" + d.score + "</b> Happiness Score, <b/>" + d.GDP + "</b> GDP"; 
+        	var color = colorScale(d.Country);
+            var html  = "<span style='color:" + colorScale + ";'>" + d.Country + "</span><br/>" +
+                        "<b>" + d.score + "</b> Happiness Score, <b/>" + d.GDP + "</b> GDP";  
             tooltip.html(html)
                 .style("left", (d3.event.pageX + 10) + "px")
                 .style("top", (d3.event.pageY - 30) + "px")
