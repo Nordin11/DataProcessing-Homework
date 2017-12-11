@@ -151,6 +151,15 @@ function load(){
 	        .style("text-anchor", "end")
 	        .text("Happiness Score");
 
+	    // Add data points
+        svg.selectAll(".dot")
+            .data(happy)
+           .enter().append("circle")
+            .attr("class", "happy-data")
+            .attr("r", 5) 
+            .attr("cx", function(d) { return xScale( d.GDP ); })   
+            .attr("cy", function(d) { return yScale( d.score ); }) 
+
 	    // Add path
 		svg.append("path")
 		    .datum(topojson.mesh(data.features, function(a, b) { return a.id !== b.id; }))
