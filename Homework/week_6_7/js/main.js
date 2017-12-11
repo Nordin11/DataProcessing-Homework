@@ -44,7 +44,7 @@ function load(){
 
 	var scatter_margin = { top: 20, right: 20, bottom: 30, left: 40 },
 					scatter_width = 1100 - scatter_margin.left - scatter_margin.right,
-					scatter_height = 1200 - scatter_margin.top - scatter_margin.bottom;
+					scatter_height = 680 - scatter_margin.top - scatter_margin.bottom;
 
 	// define svg for scatter
 	var scatter_svg = d3.select("#main-container")
@@ -132,7 +132,7 @@ function load(){
 	         // add x axis label
 	         .append("text")
 	          .attr("class", "label")
-	          .attr("x", width) 
+	          .attr("x", scatter_width) 
 	          .attr("y", -6)    
 	          .style("text-anchor", "end") 
 	          .text("GDP per capita");
