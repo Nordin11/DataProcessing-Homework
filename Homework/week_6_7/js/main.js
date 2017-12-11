@@ -152,7 +152,7 @@ function load(){
 	        .text("Happiness Score");
 
 	    // Add data points
-        svg.selectAll(".dot")
+        scatter_svg.selectAll(".dot")
             .data(happy)
            .enter().append("circle")
             .attr("class", "happy-data")
