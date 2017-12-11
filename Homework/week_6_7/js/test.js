@@ -45,22 +45,14 @@ function load(){
 	queue()
 	    .defer(d3.json, "world_countries.json")
 	    .defer(d3.tsv, "world_population.tsv")
-	    .defer(d3.csv, "world_happiness.csv")
 	    .await(ready);
 
-	function ready(error, data, population, happy) {
+	function ready(error, data, population) {
 	  
-	  if (error) throw error;
-
 	  var populationById = {};
 
 	  population.forEach(function(d) { populationById[d.id] = +d.population; });
 
-	  happy.forEach(function(d) {
-	  	d.GDP = +d.GDP
-	  	d.score = +d.score
-	  });
-	  
 	  // Set tooltips
 	  var tip = d3.tip()
             .attr('class', 'd3-tip')
@@ -110,4 +102,3 @@ function load(){
 	      .attr("d", path);
 	}
 };
-	 
