@@ -82,50 +82,6 @@ function load(){
 		  	d.score = +d.score
 		});
 
-		// Set tooltips
-		var tip = d3.tip()
-	          .attr('class', 'd3-tip')
-	          .offset([-10, 0])
-	          .html(function(d) {
-	            return "<strong>Country: </strong><span class='tip-content'>" + d.properties.name + 
-	              "<br></span>";
-	        });
-
-	    // call the tip for the map
-	   	svg.call(tip);
-
-		// draw world map
-		svg.append("g")
-		    .attr("class", "countries")
-		   .selectAll("path")
-		    .data(data.features)
-		   .enter().append("path")
-		    .attr("d", path)
-		    .style("fill", function(d) { return color(populationById[d.id]); })
-		    .style('stroke', 'white')
-		    .style('stroke-width', 1.5)
-		    .style("opacity",0.8)
-		      // tooltips
-		      .style("stroke","white")
-		      .style('stroke-width', 0.3)
-		        .on('mouseover',function(d){
-		          d3.select(this)
-		          	.attr("fill", "orange")
-		            .style("opacity", 1)
-		            .style("stroke","white")
-		            .style("stroke-width",3);
-		            tip.show(d);
-		        })
-		        .on('mouseout', function(d){
-		          d3.select(this)
-		          	.style("fill", function(d) { return color(populationById[d.id]); })
-		            .style("opacity", 0.8)
-		            .style("stroke","white")
-		            .style("stroke-width",0.3);
-		            tip.hide(d);
-
-		        });
-
 	    // specify the domains of xscale yscale
 	    xScale.domain([0, d3.max(happy, function(d) { return d.GDP; }) + 0.2 ] );
 	    yScale.domain([0, d3.max(happy, function(d) { return d.score; }) + 1 ] );
@@ -194,6 +150,70 @@ function load(){
             .on("mouseover", tipMouseover)
             .on("mouseout", tipMouseout);
 
+        // title of the scatter
+        scatter_svg.append("text")
+            .attr("class", "scatterTitle")
+            .attr("x", (scatter_width / 2) + scatter_margin.left)
+            .attr("y", 20 - (scatter_margin.top / 2))
+            .attr("text-anchor", "middle")
+            .style("font-size", "50px")
+            .text("Click on a country in the map");
+
+		// Set tooltips
+		var tip = d3.tip()
+	          .attr('class', 'd3-tip')
+	          .offset([-10, 0])
+	          .html(function(d) {
+	            return "<strong>Country: </strong><span class='tip-content'>" + d.properties.name + 
+	              "<br></span>";
+	        });
+
+	    // call the tip for the map
+	   	svg.call(tip);
+
+		// draw world map
+		svg.append("g")
+		    .attr("class", "countries")
+		   .selectAll("path")
+		    .data(data.features)
+		   .enter().append("path")
+		    .attr("d", path)
+		    .style("fill", function(d) { return color(populationById[d.id]); })
+		    .style('stroke', 'white')
+		    .style('stroke-width', 1.5)
+		    .style("opacity",0.8)
+		      // tooltips
+		      .style("stroke","white")
+		      .style('stroke-width', 0.3)
+		        .on('mouseover',function(d){
+		          d3.select(this)
+		          	.attr("fill", "orange")
+		            .style("opacity", 1)
+		            .style("stroke","white")
+		            .style("stroke-width",3);
+		            tip.show(d);
+		        })
+		        .on('mouseout', function(d){
+		          d3.select(this)
+		          	.style("fill", function(d) { return color(populationById[d.id]); })
+		            .style("opacity", 0.8)
+		            .style("stroke","white")
+		            .style("stroke-width",0.3);
+		            tip.hide(d);
+
+		        })
+		        .on("click", function(d) {
+
+                	d3.select(this).attr("fill", "red");
+
+                	var updatesvg = d3.select("#main-container")
+
+                	updatesvg.transition()
+                    	.select(".scatterTitle")
+                    	.text(d.Country);
+
+        		});
+
 	    // Add path
 		svg.append("path")
 		    .datum(topojson.mesh(data.features, function(a, b) { return a.id !== b.id; }))
@@ -201,5 +221,7 @@ function load(){
 		    .attr("class", "names")
 		    .attr("d", path);
 		};
+
+
 };
 	 
