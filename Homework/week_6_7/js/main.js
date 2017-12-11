@@ -25,13 +25,18 @@ function load(){
 
 	///// DEFINE VARIABLES FOR SCATTER /////
 
+	// define margin for scatter
+	var scatter_margin = { top: 20, right: 20, bottom: 30, left: 40 },
+					scatter_width = 800 - scatter_margin.left - scatter_margin.right,
+					scatter_height = 900 - scatter_margin.top - scatter_margin.bottom;
+
 	// define the x y scales
   	var xScale = d3.scale.linear()
-    	.range([0, width]);
+    	.range([0, scatter_width]);
       
   	var yScale = d3.scale.linear()
     	// make sure the height goes upwards in stead of top to bottom
-    	.range([height, 0]);
+    	.range([scatter_height, 0]);
 
   	// define x and y axis
   	var xAxis = d3.svg.axis()
@@ -41,10 +46,6 @@ function load(){
   	var yAxis = d3.svg.axis()
     	.scale(yScale)
     	.orient("left");
-
-	var scatter_margin = { top: 20, right: 20, bottom: 30, left: 40 },
-					scatter_width = 800 - scatter_margin.left - scatter_margin.right,
-					scatter_height = 900 - scatter_margin.top - scatter_margin.bottom;
 
 	// define svg for scatter
 	var scatter_svg = d3.select("#main-container")
@@ -142,6 +143,7 @@ function load(){
 	        .attr("class", "y axis")
 	        .call(yAxis)
 	        .style("font-size", "11px")
+	        // add x axis label
 	       .append("text")
 	        .attr("class", "label")
 	        .attr("transform", "rotate(-90)")
