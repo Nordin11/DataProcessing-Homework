@@ -54,8 +54,8 @@ function load(){
 	      "width": scatter_width + scatter_margin.right + scatter_margin.left,
 	      "height": scatter_height + scatter_margin.top + scatter_margin.bottom
 	    })
-	      .append("g")
-	        .attr("transform", "translate(" + scatter_margin.left + ',' + scatter_margin.right + ')');
+	    .append("g")
+	
 
 	queue()
 	    .defer(d3.json, "world_countries.json")
