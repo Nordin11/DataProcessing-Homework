@@ -151,6 +151,29 @@ function load(){
 	        .style("text-anchor", "end")
 	        .text("Happiness Score");
 
+	    // Add tooltip
+        var tooltip = d3.select("#container").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        // tooltip Mouse Over info
+        var tipMouseover = function(d) {
+            var html  = d.Country + "<br/>" + d.score + "</b> Happiness Score, <b/>" + d.GDP + "</b> GDP"; 
+            tooltip.html(html)
+                .style("left", (d3.event.pageX + 10) + "px")
+                .style("top", (d3.event.pageY - 30) + "px")
+               .transition()
+                .duration(400) 
+                .style("opacity", 1); 
+        };
+        
+        // tooltip mouseout event handler
+        var tipMouseout = function(d) {
+            tooltip.transition()
+                .duration(300)
+                .style("opacity", 0); 
+        };
+
 	    // Add data points
         scatter_svg.selectAll(".dot")
             .data(happy)
@@ -159,6 +182,8 @@ function load(){
             .attr("r", 5) 
             .attr("cx", function(d) { return xScale( d.GDP ); })   
             .attr("cy", function(d) { return yScale( d.score ); }) 
+            .on("mouseover", tipMouseover)
+            .on("mouseout", tipMouseout);
 
 	    // Add path
 		svg.append("path")
