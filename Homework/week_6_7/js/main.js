@@ -211,7 +211,7 @@ function load(){
 
                 	updatesvg.transition()
                     	.select(".scatterTitle")
-                    	.text(d.Country);
+                    	.text(d.name);
 
         		});
 
