@@ -126,7 +126,7 @@ function load(){
 	    // Add xAxis to svg       
 	    scatter_svg.append("g")
 	        .attr("class", "x axis")
-	          .attr("transform", "translate(0," + height + ")") 
+	          .attr("transform", "translate(0," + scatter_height + ")") 
 	          .call(xAxis)
 	          .style("font-size", "11px")
 	         // add x axis label
