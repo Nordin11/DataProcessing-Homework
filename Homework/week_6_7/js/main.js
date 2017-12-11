@@ -33,6 +33,11 @@ function load(){
     	// make sure the height goes upwards in stead of top to bottom
     	.range([height, 0]);
 
+    // define scatter margin
+	var scatter_margin = { top: 20, right: 20, bottom: 30, left: 40 },
+					scatter_width = 900 - scatter_margin.left - scatter_margin.right,
+					scatter_height = 500 - scatter_margin.top - scatter_margin.bottom;
+
    	// define svg for scatter
 	var scatter_svg = d3.select("#main-container")
 	  .append("svg")
@@ -53,9 +58,7 @@ function load(){
     	.scale(yScale)
     	.orient("left");
 
-	var scatter_margin = { top: 20, right: 20, bottom: 30, left: 40 },
-					scatter_width = 900 - scatter_margin.left - scatter_margin.right,
-					scatter_height = 500 - scatter_margin.top - scatter_margin.bottom;
+
 
 
 	queue()
