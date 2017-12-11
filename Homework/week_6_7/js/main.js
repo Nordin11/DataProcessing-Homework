@@ -127,13 +127,13 @@ function load(){
 	    // Add xAxis to svg       
 	    scatter_svg.append("g")
 	        .attr("class", "x axis")
-	          .attr("transform", "translate(0," + height + ")") 
+	          .attr("transform", "translate(0," + scatter_height + ")") 
 	          .call(xAxis)
 	          .style("font-size", "11px")
 	         // add x axis label
 	         .append("text")
 	          .attr("class", "label")
-	          .attr("x", width) 
+	          .attr("x", scatter_width) 
 	          .attr("y", -6)    
 	          .style("text-anchor", "end") 
 	          .text("GDP per capita");
