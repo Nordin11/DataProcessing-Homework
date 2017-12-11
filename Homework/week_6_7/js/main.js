@@ -50,64 +50,96 @@ function load(){
 
 	function ready(error, data, population, happy) {
 	  
-	  if (error) throw error;
+		if (error) throw error;
 
-	  var populationById = {};
+		var populationById = {};
 
-	  population.forEach(function(d) { populationById[d.id] = +d.population; });
+		population.forEach(function(d) { populationById[d.id] = +d.population; });
 
-	  happy.forEach(function(d) {
-	  	d.GDP = +d.GDP
-	  	d.score = +d.score
-	  });
-	  
-	  // Set tooltips
-	  var tip = d3.tip()
-            .attr('class', 'd3-tip')
-            .offset([-10, 0])
-            .html(function(d) {
-              return "<strong>Country: </strong><span class='tip-content'>" + d.properties.name + 
-              "<br></span>";
-            })
-   	  svg.call(tip);
+		happy.forEach(function(d) {
+			d.GDP = +d.GDP
+		  	d.score = +d.score
+		});
 
-	  // draw world map
-	  svg.append("g")
-	      .attr("class", "countries")
-	    .selectAll("path")
-	      .data(data.features)
-	    .enter().append("path")
-	      .attr("d", path)
-	      .style("fill", function(d) { return color(populationById[d.id]); })
-	      .style('stroke', 'white')
-	      .style('stroke-width', 1.5)
-	      .style("opacity",0.8)
-	      	// tooltips
-	        .style("stroke","white")
-	        .style('stroke-width', 0.3)
-	        .on('mouseover',function(d){
-	          d3.select(this)
-	          	.attr("fill", "orange")
-	            .style("opacity", 1)
-	            .style("stroke","white")
-	            .style("stroke-width",3);
-	            tip.show(d);
-	        })
-	        .on('mouseout', function(d){
-	          d3.select(this)
-	          	.style("fill", function(d) { return color(populationById[d.id]); })
-	            .style("opacity", 0.8)
-	            .style("stroke","white")
-	            .style("stroke-width",0.3);
-	            tip.hide(d);
-
+		// Set tooltips
+		var tip = d3.tip()
+	          .attr('class', 'd3-tip')
+	          .offset([-10, 0])
+	          .html(function(d) {
+	            return "<strong>Country: </strong><span class='tip-content'>" + d.properties.name + 
+	              "<br></span>";
 	        });
 
-	  svg.append("path")
-	      .datum(topojson.mesh(data.features, function(a, b) { return a.id !== b.id; }))
-	       // .datum(topojson.mesh(data.features, function(a, b) { return a !== b; }))
-	      .attr("class", "names")
-	      .attr("d", path);
-	}
+	   	svg.call(tip);
+
+		// draw world map
+		svg.append("g")
+		    .attr("class", "countries")
+		   .selectAll("path")
+		    .data(data.features)
+		   .enter().append("path")
+		    .attr("d", path)
+		    .style("fill", function(d) { return color(populationById[d.id]); })
+		    .style('stroke', 'white')
+		    .style('stroke-width', 1.5)
+		    .style("opacity",0.8)
+		      // tooltips
+		      .style("stroke","white")
+		      .style('stroke-width', 0.3)
+		        .on('mouseover',function(d){
+		          d3.select(this)
+		          	.attr("fill", "orange")
+		            .style("opacity", 1)
+		            .style("stroke","white")
+		            .style("stroke-width",3);
+		            tip.show(d);
+		        })
+		        .on('mouseout', function(d){
+		          d3.select(this)
+		          	.style("fill", function(d) { return color(populationById[d.id]); })
+		            .style("opacity", 0.8)
+		            .style("stroke","white")
+		            .style("stroke-width",0.3);
+		            tip.hide(d);
+
+		        });
+
+	    // specify the domains of xscale yscale
+	    xScale.domain([0, d3.max(happy, function(d) { return d.GDP; }) + 0.2 ] );
+	    yScale.domain([0, d3.max(happy, function(d) { return d.score; }) + 1 ] );
+
+	    // Add xAxis to svg       
+	    svg.append("g")
+	        .attr("class", "x axis")
+	          .attr("transform", "translate(0," + height + ")") 
+	          .call(xAxis)
+	          .style("font-size", "11px")
+	         // add x axis label
+	         .append("text")
+	          .attr("class", "label")
+	          .attr("x", width) 
+	          .attr("y", -6)    
+	          .style("text-anchor", "end") 
+	          .text("GDP per capita");
+	    
+	    // Add yAxis to svg 
+	    svg.append("g")
+	        .attr("class", "y axis")
+	        .call(yAxis)
+	        .style("font-size", "11px")
+	       .append("text")
+	        .attr("class", "label")
+	        .attr("transform", "rotate(-90)")
+	        .attr("y", 15) 
+	        .style("text-anchor", "end")
+	        .text("Happiness Score");
+
+	    // Add path
+		svg.append("path")
+		    .datum(topojson.mesh(data.features, function(a, b) { return a.id !== b.id; }))
+		    // .datum(topojson.mesh(data.features, function(a, b) { return a !== b; }))
+		    .attr("class", "names")
+		    .attr("d", path);
+		};
 };
 	 
