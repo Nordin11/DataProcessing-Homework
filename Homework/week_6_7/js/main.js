@@ -42,6 +42,21 @@ function load(){
     	.scale(yScale)
     	.orient("left");
 
+	var scatter_margin = { top: 20, right: 20, bottom: 30, left: 40 },
+					scatter_width = 880 - scatter_margin.left - scatter_margin.right,
+					scatter_height = 500 - scatter_margin.top - scatter_margin.bottom;
+
+	// define svg for scatter
+	var scatter_svg = d3.select("#main-container")
+	  .append("svg")
+	    // group attributes together
+	    .attr ({
+	      "width": scatter_width + scatter_margin.right + scatter_margin.left,
+	      "height": scatter_height + scatter_margin.top + scatter_margin.bottom
+	    })
+	      .append("g")
+	        .attr("transform", "translate(" + scatter_margin.left + ',' + scatter_margin.right + ')');
+
 	queue()
 	    .defer(d3.json, "world_countries.json")
 	    .defer(d3.tsv, "world_population.tsv")
@@ -109,7 +124,7 @@ function load(){
 	    yScale.domain([0, d3.max(happy, function(d) { return d.score; }) + 1 ] );
 
 	    // Add xAxis to svg       
-	    svg.append("g")
+	    scatter_svg.append("g")
 	        .attr("class", "x axis")
 	          .attr("transform", "translate(0," + height + ")") 
 	          .call(xAxis)
@@ -123,7 +138,7 @@ function load(){
 	          .text("GDP per capita");
 	    
 	    // Add yAxis to svg 
-	    svg.append("g")
+	    scatter_svg.append("g")
 	        .attr("class", "y axis")
 	        .call(yAxis)
 	        .style("font-size", "11px")
