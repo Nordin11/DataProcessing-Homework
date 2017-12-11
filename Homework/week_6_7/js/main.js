@@ -204,16 +204,18 @@ function load(){
 
 		        })
 		        .on("click", function(d) {
-
                     var map_country = d.names;
 
                     for (var i = 0; i < happy.length; i++) {
-                    	if (happy[i].Country.localeCompare(names) == 0) {
+                    	if (happy[i].Country.localeCompare(d.names) == 0) {
+
         					scatter_svg.select(".happy-data")
             				.data(happy)
           					.transition()
                             .duration(500)
-            				.attr("r", 10) 		
+            				.attr("r", 10) 
+
+            				return;
                     	}
                     };
         		});
