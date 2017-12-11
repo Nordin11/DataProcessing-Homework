@@ -33,12 +33,20 @@ function load(){
     	// make sure the height goes upwards in stead of top to bottom
     	.range([height, 0]);
 
-    // define scatter margin
-	var scatter_margin = { top: 20, right: 20, bottom: 30, left: 40 },
-					scatter_width = 900 - scatter_margin.left - scatter_margin.right,
-					scatter_height = 500 - scatter_margin.top - scatter_margin.bottom;
+  	// define x and y axis
+  	var xAxis = d3.svg.axis()
+    	.scale(xScale)
+    	.orient("bottom");
 
-   	// define svg for scatter
+  	var yAxis = d3.svg.axis()
+    	.scale(yScale)
+    	.orient("left");
+
+	var scatter_margin = { top: 20, right: 20, bottom: 30, left: 40 },
+					scatter_width = 1100 - scatter_margin.left - scatter_margin.right,
+					scatter_height = 1200 - scatter_margin.top - scatter_margin.bottom;
+
+	// define svg for scatter
 	var scatter_svg = d3.select("#main-container")
 	  .append("svg")
 	    // group attributes together
@@ -48,18 +56,6 @@ function load(){
 	    })
 	      .append("g")
 	        .attr("transform", "translate(" + scatter_margin.left + ',' + scatter_margin.right + ')');
-
-  	// define x and y axis
-  	var xAxis = d3.scatter_svg.axis()
-    	.scale(xScale)
-    	.orient("bottom");
-
-  	var yAxis = d3.scatter_svg.axis()
-    	.scale(yScale)
-    	.orient("left");
-
-
-
 
 	queue()
 	    .defer(d3.json, "world_countries.json")
@@ -130,13 +126,13 @@ function load(){
 	    // Add xAxis to svg       
 	    scatter_svg.append("g")
 	        .attr("class", "x axis")
-	          .attr("transform", "translate(0," + scatter_height + ")") 
+	          .attr("transform", "translate(0," + height + ")") 
 	          .call(xAxis)
 	          .style("font-size", "11px")
 	         // add x axis label
 	         .append("text")
 	          .attr("class", "label")
-	          .attr("x", scatter_width) 
+	          .attr("x", width) 
 	          .attr("y", -6)    
 	          .style("text-anchor", "end") 
 	          .text("GDP per capita");
