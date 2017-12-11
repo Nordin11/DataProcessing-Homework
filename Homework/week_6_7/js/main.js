@@ -54,7 +54,7 @@ function load(){
 	      "width": scatter_width + scatter_margin.right + scatter_margin.left,
 	      "height": scatter_height + scatter_margin.top + scatter_margin.bottom
 	    })
-	      .append("g")
+	      .append("gr")
 	        .attr("transform", "translate(" + scatter_margin.left + ',' + scatter_margin.right + ')');
 
 	queue()
@@ -124,7 +124,7 @@ function load(){
 	    yScale.domain([0, d3.max(happy, function(d) { return d.score; }) + 1 ] );
 
 	    // Add xAxis to svg       
-	    scatter_svg.append("g")
+	    scatter_svg.append("gr")
 	        .attr("class", "x axis")
 	          .attr("transform", "translate(0," + height + ")") 
 	          .call(xAxis)
@@ -138,7 +138,7 @@ function load(){
 	          .text("GDP per capita");
 	    
 	    // Add yAxis to svg 
-	    scatter_svg.append("g")
+	    scatter_svg.append("gr")
 	        .attr("class", "y axis")
 	        .call(yAxis)
 	        .style("font-size", "11px")
