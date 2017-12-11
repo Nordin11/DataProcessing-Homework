@@ -61,6 +61,7 @@ function load(){
 	      .append("g")
 	        .attr("transform", "translate(" + scatter_margin.left + ',' + scatter_margin.right + ')');
 
+	// load the data files via queue
 	queue()
 	    .defer(d3.json, "world_countries.json")
 	    .defer(d3.tsv, "world_population.tsv")
@@ -68,11 +69,12 @@ function load(){
 	    .await(ready);
 
 	function ready(error, data, population, happy) {
-	
+		
+		// check for errors
 		if (error) throw error;
 
+		// convert data in proper format
 		var populationById = {};
-
 		population.forEach(function(d) { populationById[d.id] = +d.population; });
 
 		happy.forEach(function(d) {
@@ -89,6 +91,7 @@ function load(){
 	              "<br></span>";
 	        });
 
+	    // call the tip for the map
 	   	svg.call(tip);
 
 		// draw world map
@@ -186,7 +189,8 @@ function load(){
             .attr("class", "happy-data")
             .attr("r", 5) 
             .attr("cx", function(d) { return xScale( d.GDP ); })   
-            .attr("cy", function(d) { return yScale( d.score ); }) 
+            .attr("cy", function(d) { return yScale( d.score ); })
+            .style("fill", function(d) { return colorScale( d.Country ); })
             .on("mouseover", tipMouseover)
             .on("mouseout", tipMouseout);
 
