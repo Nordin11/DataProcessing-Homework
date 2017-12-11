@@ -27,7 +27,7 @@ function load(){
 
 	// define margin for scatter
 	var scatter_margin = { top: 20, right: 20, bottom: 30, left: 40 },
-					scatter_width = 800 - scatter_margin.left - scatter_margin.right,
+					scatter_width = 1000 - scatter_margin.left - scatter_margin.right,
 					scatter_height = 900 - scatter_margin.top - scatter_margin.bottom;
 
 	// define the x y scales
@@ -65,7 +65,7 @@ function load(){
 	    .await(ready);
 
 	function ready(error, data, population, happy) {
-	  
+	
 		if (error) throw error;
 
 		var populationById = {};
