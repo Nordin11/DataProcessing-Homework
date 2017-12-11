@@ -43,8 +43,8 @@ function load(){
     	.orient("left");
 
 	var scatter_margin = { top: 20, right: 20, bottom: 30, left: 40 },
-					scatter_width = 880 - scatter_margin.left - scatter_margin.right,
-					scatter_height = 700 - scatter_margin.top - scatter_margin.bottom;
+					scatter_width = 1100 - scatter_margin.left - scatter_margin.right,
+					scatter_height = 1000 - scatter_margin.top - scatter_margin.bottom;
 
 	// define svg for scatter
 	var scatter_svg = d3.select("#main-container")
