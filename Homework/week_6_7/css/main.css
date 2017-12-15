@@ -21,6 +21,15 @@ body {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+#story-container {
+	max-width: 1250px;
+	margin: 0 auto;
+	height: 600px;
+	min-height: 600px;
+	background-color:#fff;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .d3-tip {
     line-height: 1.5;
     font-weight: bold;
