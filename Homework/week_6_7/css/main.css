@@ -1,8 +1,13 @@
+/* Nordin Bouchrit */
+/* 11050608 */
+
+/* style for the whole page */
 body {
 	font-family: 'Comfortaa', cursive; 
 	background-color: #ededed;
 }
 
+/* add home button style */
 .navbar-brand {
 	font-weight: bold;
 	border: 1px solid;
@@ -12,6 +17,7 @@ body {
 
 }
 
+/* add scatter container style */
 #main-container {
 	max-width: 1250px;
 	margin: 0 auto;
@@ -21,15 +27,17 @@ body {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+/* add story container style */
 #story-container {
 	max-width: 1250px;
 	margin: 0 auto;
-	height: 600px;
-	min-height: 600px;
+	height: 800px;
+	min-height: 800px;
 	background-color:#fff;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+/* give the map-tip a style */
 .d3-tip {
     line-height: 1.5;
     font-weight: bold;
@@ -44,6 +52,7 @@ body {
 	color: #f9f9f9;
 }
 
+/* make sure axis is good visible */
 .axis path,
 .axis line {
 	fill: none;
@@ -51,6 +60,7 @@ body {
 	shape-rendering: crispEdges;
 }
 
+/* give the scatter tip a good style */
 .tooltip {
 	position: absolute;
 	font-size: 13px;

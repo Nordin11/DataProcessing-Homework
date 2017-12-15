@@ -1,5 +1,7 @@
+// used by Nordin Bouchrit //
+
 // d3.tip
-// Copyright (c) 2013 Justin Palmer
+// 2013 Justin Palmer
 //
 // Tooltips for d3.js SVG visualizations
 

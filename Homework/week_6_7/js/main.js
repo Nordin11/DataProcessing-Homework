@@ -1,6 +1,9 @@
+// NORDIN BOUCHRIT //
+// 11050608 //
+
 function load(){
 
-	///// define variables for the map /////
+	///// DEFINE MAP VARIABLES /////
 	var margin = {top: 50, right: 15, bottom: 20, left: 20},
 	            width = 1300 - margin.left - margin.right,
 	            height = 750 - margin.top - margin.bottom;
