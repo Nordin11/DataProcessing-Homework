@@ -161,7 +161,7 @@ function load(){
             .attr("text-anchor", "middle")
             .style("font-size", "12px")
             .style("font-weight", "bold")
-            .text("Click on a country in the worldmap below");
+            .text("World Happiness vs GDP");
 
 		// Set tooltips
 		var tip = d3.tip()
